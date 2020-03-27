@@ -1,0 +1,182 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/tabBar/home/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
+			"path": "pages/tabBar/contact/index",
+			"style": {
+				"navigationBarTitleText": "联系我们",
+				"enablePullDownRefresh": false
+			}
+		},		
+		{
+			"path": "pages/tabBar/post/index",
+			"style": {
+				"navigationBarTitleText": "发帖",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/tabBar/my/index",
+			"style": {
+				"navigationBarTitleText": "我的"
+			}
+		},
+		{
+			"path":"pages/list"
+		},
+		{
+			"path": "pages/detail",
+			"style": {
+				"navigationBarTitleText": "详情信息"
+			}			
+		},
+		{
+			"path": "pages/productlist",
+			"style": {
+				"navigationBarTitleText": "产品列表"
+			}			
+		}								
+	],
+	"subPackages": [{
+		"root":"pages/post",
+		"pages": [
+			{
+				"path": "fdcar",
+				"style": {
+					"navigationBarTitleText": "发表帖子",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "shop",
+				"style": {
+					"navigationBarTitleText": "发布店铺",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "postproduct",
+				"style": {
+					"navigationBarTitleText": "发布产品",
+					"enablePullDownRefresh": false
+				}
+			},			
+			{
+				"path": "product",
+				"style": {
+					"navigationBarTitleText": "发布商品",
+					"enablePullDownRefresh": false
+				}
+			},			
+			{
+				"path": "village",
+				"style": {
+					"navigationBarTitleText": "发表帖子",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "rent",
+				"style": {
+					"navigationBarTitleText": "发表帖子",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "invite",
+				"style": {
+					"navigationBarTitleText": "发表帖子",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "used",
+				"style": {
+					"navigationBarTitleText": "发表帖子",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "serivces",
+				"style": {
+					"navigationBarTitleText": "发表帖子",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "help",
+				"style": {
+					"navigationBarTitleText": "发表帖子",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "taxi",
+				"style": {
+					"navigationBarTitleText": "发表帖子",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "skill",
+				"style": {
+					"navigationBarTitleText": "发表帖子",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "nav",
+				"style": {
+					"navigationBarTitleText": "发表帖子",
+					"enablePullDownRefresh": false
+				}
+			},
+			{
+				"path": "love",
+				"style": {
+					"navigationBarTitleText": "发表帖子",
+					"enablePullDownRefresh": false
+				}
+			}			
+		]
+	}],
+	"globalStyle": {
+		"enablePullDownRefresh": true,
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "小程序",
+		"navigationBarBackgroundColor": "#516a04",
+		"backgroundColor": "#FFFFFF"
+	},
+	"tabBar": {
+		"color":"#8a8a8a",
+		"selectedColor":"#516A04",
+		"backgroundColor":"#FFFFFF",
+		"borderStyle":"black",
+		"list": [{
+			"pagePath": "pages/tabBar/home/index",
+			"iconPath": "static/home.png",
+			"selectedIconPath": "static/home_act.png",
+			"text": "首页"			
+		},{
+			"pagePath": "pages/tabBar/contact/index",
+			"iconPath": "static/contact.png",
+			"selectedIconPath": "static/contact_act.png",
+			"text": "联系我们"			
+		},{
+			"pagePath": "pages/tabBar/post/index",
+			"iconPath": "static/post.png",
+			"selectedIconPath": "static/post_act.png",
+			"text": "发帖"			
+		},{
+			"pagePath": "pages/tabBar/my/index",
+			"iconPath": "static/mine.png",
+			"selectedIconPath": "static/mine_act.png",
+			"text": "我的"			
+		}]
+	}
+}
