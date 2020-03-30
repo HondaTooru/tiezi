@@ -1,11 +1,14 @@
 <template>
-	<view class="cu-bar tabbar bg-white solids-top">
-		<view class="action" v-for="(item, index) in list" :key="index" @tap="change" :data-index="index">
-			<view class="cuIcon-cu-image">
-				<image :src="item.image"></image>
-			</view>
-			<view>{{ item.name }}</view>
-		</view>					
+	<view>
+		<view class="h"></view>
+		<view class="cu-bar tabbar bg-white solids-top">
+			<view class="action" v-for="(item, index) in list" :key="index" @tap="change" :data-index="index">
+				<view class="cuIcon-cu-image">
+					<image :src="item.image"></image>
+				</view>
+				<view>{{ item.name }}</view>
+			</view>					
+		</view>
 	</view>
 </template>
 
@@ -61,6 +64,7 @@
 </script>
 
 <style lang="scss" scoped>
+.h {height: calc(100rpx + env(safe-area-inset-bottom) / 2)}
 .tabbar {
 	position: fixed;
 	bottom: 0;

@@ -493,7 +493,6 @@ export default {
 
 <style lang="scss" scoped>
 .compage {
-	padding-bottom: calc(100rpx + env(safe-area-inset-bottom) / 2);	
 	.box {
 		.banner {
 			min-height: 200rpx;

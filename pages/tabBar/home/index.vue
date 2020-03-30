@@ -91,8 +91,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="myshop padding-xs radius flex flex-direction justify-center align-center" @tap="toShop">
-			<image src="../../../static/shop.png" mode=""></image>
+		<view class="myshop padding-xs flex flex-direction justify-center align-center" @tap="toShop">
 			<text class="text-xs">本地商铺</text>
 		</view>
 	</view>
@@ -104,7 +103,7 @@
 	import qqMap from '@/utils/qqmap-wx-jssdk.min'
 	import { getIndexCate, placardList } from '@/api'
 	import { mapActions } from 'vuex'
-	const qqMapSdk = new qqMap({ key: 'CRZBZ-4MTK6-Z6DSO-MCI7X-LUTGV-73B5X' })
+	const qqMapSdk = new qqMap({ key: 'TEDBZ-3JWEX-TRZ45-76W7H-BPKXV-E6BAS' })
 	export default {
 		name: 'home',
 		onShareAppMessage (res) {
@@ -300,20 +299,12 @@
 						this.s = data.roll
 						this.is_show = data.is_show
 						const region = uni.getStorageSync('region')
-						qqMapSdk.geocoder({
-							address: data.address,
-							success: res => {
-								const {phone, address} = data
-								const atx =  { phone, address, location: res.result.location }
-								uni.setStorageSync('contact', atx)
-								this.$store.commit('SET_CONTACT', atx)
-							}
-						})						
+						this.$store.commit('SET_CONTACT', {phone: data.phone, address: data.address})					
 						if (!region) {
 							uni.setStorageSync('region', data.region[0])
 							this.$store.commit('SET_TAP', uni.getStorageSync('Tap') || 0)
 						} else {
-							this.$store.commit('SET_TAP', uni.getStorageSync('currentTab'))
+							this.$store.commit('SET_TAP', uni.getStorageSync('currentTab') || 0)
 						}
 						resolve(region ? region : data.region[0])
 					})
@@ -357,14 +348,13 @@
 	.myshop {
 		position: fixed;
 		top: 40%;
-		background-color: rgba(223, 66, 54, .9);
+		background-color: rgb(223, 66, 54);
 		right: 5rpx;
 		z-index: 99;
-		image {
-			width: 60rpx;
-			height: 60rpx;
-		}
-		text { color: #FFAD15 }
+		border-radius: 20rpx;
+		width: 140rpx;
+		text-align: center;
+		text { color: #FFAD15; font-size: 50rpx;font-weight: bold; }
 	}
 	.box {
 		overflow: hidden;

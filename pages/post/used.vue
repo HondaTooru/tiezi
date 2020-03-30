@@ -81,7 +81,7 @@
 			this.params.region = uni.getStorageSync('region')
 			this.params.category_id = this.type.length ? type[0].id : this.params.column_id
 			if (details.id !== void 0) {
-				thia.params.id = details.id
+				this.params.id = details.id
 				this.params.title = details.title
 				this.params.content = details.content
 				this.imgList = details.imgurl

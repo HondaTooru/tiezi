@@ -1,10 +1,10 @@
 <template>
 	<view class="bg-white">
-		<swiper class="swiper" :indicator-dots="false" :autoplay="false" :duration="1000" :display-multiple-items="4" v-if="type">
+		<swiper class="swiper" :indicator-dots="false" :autoplay="false" :duration="1000" :display-multiple-items="4" previous-margin="5rpx" next-margin="5rpx" v-if="type">
 			<swiper-item v-for="(item, index) in navList" :key="index" class="vx" @tap="change" :data-index="index" :data-id="item.id" :data-name="item.cate_name">
 				<view class="src">
 					<image :src="item.pic" class="image"></image>
-					<text class="text-xs txt">{{ item.cate_name }}</text>
+					<!-- <text class="text-xs txt">{{ item.cate_name }}</text> -->
 				</view>
 			</swiper-item>					
 		</swiper>
@@ -65,7 +65,7 @@
 
 <style lang="scss" scoped>
 .swiper {
-	height: 220rpx;
+	height: 188rpx;
 	.vx {
 		display: flex;
 		align-items: center;
@@ -80,10 +80,10 @@
 			width: 100%;
 			height: 100%;
 			color:white;
-			.txt {font-size: 30rpx;color:black;margin-top: 10rpx;}
+			.txt {font-size: 34rpx;color:black;margin-top: 10rpx; font-weight: 600;color:#516a04}
 			.image {
-				width: 120rpx;
-				height: 120rpx;
+				width: 168rpx;
+				height: 168rpx;
 				display: block;
 			}		
 		}
