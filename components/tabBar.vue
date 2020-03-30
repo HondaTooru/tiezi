@@ -64,7 +64,7 @@
 </script>
 
 <style lang="scss" scoped>
-.h {height: calc(100rpx + env(safe-area-inset-bottom) / 2)}
+.h { height: 100rpx }
 .tabbar {
 	position: fixed;
 	bottom: 0;

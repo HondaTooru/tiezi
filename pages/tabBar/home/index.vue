@@ -293,7 +293,6 @@
 					getIndexCate().then(res => {
 						const data = res.data
 						this.$store.commit('SET_NAV', data.cate_name)
-						console.log(data.cate_name)
 						this.$store.commit('SET_CITY', data.region)
 						this.$store.commit('SET_RULE', data.rule)
 						this.s = data.roll
