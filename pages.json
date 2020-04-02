@@ -40,7 +40,19 @@
 			"style": {
 				"navigationBarTitleText": "产品列表"
 			}			
-		}								
+		},
+		{
+			"path": "pages/userdata",
+			"style": {
+				"navigationBarTitleText": "个人信息"
+			}
+		},
+		{
+			"path": "pages/addData",
+			"style": {
+				"navigationBarTitleText": "添加资料"
+			}
+		}		
 	],
 	"subPackages": [{
 		"root":"pages/post",

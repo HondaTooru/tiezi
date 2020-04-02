@@ -1,10 +1,9 @@
 <template>
 	<view class="bg-white">
-		<swiper class="swiper" :indicator-dots="false" :autoplay="false" :duration="1000" :display-multiple-items="4" previous-margin="5rpx" next-margin="5rpx" v-if="type">
+		<swiper class="swiper" :interval="3000" :indicator-dots="false" :autoplay="true" :duration="1000" :display-multiple-items="4" previous-margin="5rpx" next-margin="5rpx" v-if="type">
 			<swiper-item v-for="(item, index) in navList" :key="index" class="vx" @tap="change" :data-index="index" :data-id="item.id" :data-name="item.cate_name">
 				<view class="src">
 					<image :src="item.pic" class="image"></image>
-					<!-- <text class="text-xs txt">{{ item.cate_name }}</text> -->
 				</view>
 			</swiper-item>					
 		</swiper>

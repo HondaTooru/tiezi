@@ -24,7 +24,9 @@ import {
 	delCollect, 
 	delPost,
 	UserShop,
+	SeeMe,
 	DelProdcut,
+	AdduserData,
 	SubmitProduct } from '@/api'
 
 const user = {
@@ -38,6 +40,7 @@ const user = {
 		tiez: [],
 		shop: [],
 		Tap: 0,
+		myData: {},
 		collect: [],
 		userShop: [],
 		x: {
@@ -76,6 +79,9 @@ const user = {
 		},
 		SET_PAGE: (state, page) => {
 			state.x.page = page
+		},
+		SET_MYDATA: (state, myData) => {
+			state.myData = myData
 		},
 		SET_LIST: (state, collect) => {
 			state.collect = collect
@@ -137,6 +143,13 @@ const user = {
 			} else {
 				commit('SET_SHOWMODAL', true)
 			}
+		},
+		addMyData () {
+			return new Promise(resolve => {
+				AdduserData().then(res => {
+					resolve(res)
+				})
+			})
 		},
 		uploadImage ({ state }, fileList) { // 上传图片
 			return new Promise(async (resolve, reject) => {
@@ -249,6 +262,7 @@ const user = {
 				await dispatch('getData')
 				await dispatch('getList')
 				await dispatch('getUserShop')
+				await dispatch('SeeMyData')
 				uni.hideLoading()
 				resolve()
 			})
@@ -301,6 +315,15 @@ const user = {
 					resolve()
 				})
 			}) 
+		},
+		SeeMyData ({ state, commit }) {
+			return new Promise(resolve => {
+				SeeMe({}, { header: { token: state.userInfo.token } }).then(res => {
+					console.log(res)
+					if (res.code === 200) commit('SET_MYDATA', res.data)
+					resolve(res)
+				})
+			})
 		},
 		getUserShop ({ state, commit }, type) {
 			return new Promise(resolve => {

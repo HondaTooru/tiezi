@@ -9,6 +9,7 @@ const getters = {
 	collect: state => state.user.collect,
 	cityList: state => state.app.cityList,
 	navList:state => state.app.navList,
+	myData: state => state.user.myData,
 	rule: state => state.app.rule,
 	showModal: state => state.user.showModal,
 	userShop: state => state.user.userShop

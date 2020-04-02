@@ -152,3 +152,11 @@ export function DelProdcut (data, header) {
 export function UserShop (data, header) {
 	return service.post('/ebapi/placard_user_api/get_user_shop', data, header)
 }
+
+export function SeeMe (data, header) {
+	return service.post('/ebapi/placard_user_api/see_user', data, header)
+}
+
+export function AdduserData (data, header) {
+	return service.post('/ebapi/placard_user_api/add_user', data, header)
+}

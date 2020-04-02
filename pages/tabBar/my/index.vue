@@ -4,7 +4,7 @@
 		<view class="bg-sea padding-lr-sm padding-tb-xl">
 			<userAuth></userAuth>
 			<view class="flex align-center">
-				<view class="cu-avatar xl round" :style="{backgroundImage: 'url('+uAvatar+')'}"></view>
+				<navigator hover-class="noe" :url="url" class="cu-avatar xl round" :style="{backgroundImage: 'url('+uAvatar+')'}"></navigator>
 				<view class="margin-left flex flex-direction" v-if="isLogin">
 					<view>
 						<view class="cu-tag bg-white">钱包: {{ userInfo.now_money }}</view>
@@ -210,7 +210,7 @@
 			}
 		},
 		computed: {
-			...mapGetters(['isLogin', 'userInfo', 'address', 'tiez', 'collect', 'userShop']),
+			...mapGetters(['isLogin', 'userInfo', 'address', 'tiez', 'collect', 'userShop', 'myData']),
 			url () {
 				let url = '/pages/post/'
 				if (this.column_id === 16) url += 'nav'
@@ -232,6 +232,9 @@
 			},
 			src () {
 				return !this.act ? '/static/images/post.png' : '/static/images/favorite.png'
+			},
+			url () {
+				return this.myData ? '/pages/userdata' : '/pages/addData'
 			},
 			uAvatar () {
 				return this.isLogin ? this.userInfo.avatar : AVATAR
