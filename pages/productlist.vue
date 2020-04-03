@@ -18,7 +18,13 @@
 			</view>			
 		</view>
 		<empty-data v-else></empty-data>
-		<tabBar :url="'/pages/post/product?id='+id" name="发布"></tabBar>	
+		<tabBar :url="'/pages/post/product?id='+id" name="发布"></tabBar>
+		<view class="share radius">
+			<view class="padding-sm" @tap="callPhone">
+				<text class="lg text-white cuIcon-phone"></text>
+				<text class="text-white padding-lr-xs">联系方式</text>
+			</view>	
+		</view>		
 	</view>
 </template>
 
@@ -28,11 +34,13 @@
 		data () {
 			return {
 				list: [],
-				id: ''
+				id: '',
+				phone: ''
 			}
 		},
 		onLoad (option) {
 			this.id = option.id
+			this.phone = option.phone
 			this.getList(this.id)
 		},
 		onPullDownRefresh () {
@@ -45,7 +53,12 @@
 					urls,
 					indicator: 'number'
 				})
-			},			
+			},
+			callPhone () {
+				uni.makePhoneCall({
+					phoneNumber: this.phone
+				})
+			},						
 			getList (store_id, type) {
 				uni.showLoading({ title: '加载中' })
 				MyProductList({ store_id }).then(res => {
@@ -76,6 +89,13 @@
 					}
 				}				
 			}
+		}
+		.share {
+			position: fixed;
+			top: 60%;
+			background-color: rgba(223, 66, 54, .9);
+			right: 5rpx;
+			z-index: 9999;
 		}
 	}
 </style>

@@ -4,7 +4,8 @@
 		<view class="bg-sea padding-lr-sm padding-tb-xl">
 			<userAuth></userAuth>
 			<view class="flex align-center">
-				<navigator hover-class="noe" :url="url" class="cu-avatar xl round" :style="{backgroundImage: 'url('+uAvatar+')'}"></navigator>
+				<navigator hover-class="noe" v-if="isLogin" :url="urls" class="setting flex align-center"><text class="lg text-white text-gray cuIcon-settingsfill"></text><text class="padding-left-xs">我的资料</text></navigator>
+				<view class="cu-avatar xl round" :style="{backgroundImage: 'url('+uAvatar+')'}"></view>
 				<view class="margin-left flex flex-direction" v-if="isLogin">
 					<view>
 						<view class="cu-tag bg-white">钱包: {{ userInfo.now_money }}</view>
@@ -233,8 +234,8 @@
 			src () {
 				return !this.act ? '/static/images/post.png' : '/static/images/favorite.png'
 			},
-			url () {
-				return this.myData ? '/pages/userdata' : '/pages/addData'
+			urls () {
+				return JSON.stringify(this.myData) !== '{}' ? '/pages/userdata' : '/pages/addData'
 			},
 			uAvatar () {
 				return this.isLogin ? this.userInfo.avatar : AVATAR
@@ -246,7 +247,16 @@
 <style lang="scss" scoped>
 .my {
 	background-color:#f1f1f1;
-	.bg-sea {position: relative;}
+	.bg-sea {position: relative;
+	.setting {
+		position: absolute;
+		top: 20rpx;
+		right: 30rpx;
+		.lg {
+			font-size: 36rpx;
+		}
+	}
+	}
 	.shop-name {
 		position: sticky;
 		top: 0;

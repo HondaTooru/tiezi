@@ -144,9 +144,9 @@ const user = {
 				commit('SET_SHOWMODAL', true)
 			}
 		},
-		addMyData () {
+		addMyData ({ state }, data) {
 			return new Promise(resolve => {
-				AdduserData().then(res => {
+				AdduserData(data, { header: { token: state.userInfo.token } }).then(res => {
 					resolve(res)
 				})
 			})
@@ -319,8 +319,10 @@ const user = {
 		SeeMyData ({ state, commit }) {
 			return new Promise(resolve => {
 				SeeMe({}, { header: { token: state.userInfo.token } }).then(res => {
-					console.log(res)
-					if (res.code === 200) commit('SET_MYDATA', res.data)
+					if (res.code === 200) {
+						commit('SET_MYDATA', res.data || {})
+						uni.setStorageSync('myData', res.data || {})
+					}
 					resolve(res)
 				})
 			})

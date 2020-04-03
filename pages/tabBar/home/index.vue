@@ -91,9 +91,6 @@
 				</view>
 			</view>
 		</view>
-		<view class="myshop padding-xs flex flex-direction justify-center align-center" @tap="toShop">
-			<text class="text-xs">本地商铺</text>
-		</view>
 	</view>
 </template>
 
@@ -106,13 +103,7 @@
 	const qqMapSdk = new qqMap({ key: 'TEDBZ-3JWEX-TRZ45-76W7H-BPKXV-E6BAS' })
 	export default {
 		name: 'home',
-		onShareAppMessage (res) {
-			// if (res.form === 'button') {
-			// 	return {
-			// 		title: ''
-			// 	}
-			// }
-		},
+		onShareAppMessage (res) {},
 		async onPullDownRefresh () {
 			uni.showLoading({ title: '请稍后' })
 			await this.getIndex()
@@ -152,14 +143,6 @@
 					urls,
 					indicator: 'number'
 				})
-			},
-			toShop () {
-				const name = '本地商铺'
-				const id = 13
-				uni.setStorageSync('nav', { name, id })
-				uni.navigateTo({
-					url: `/pages/list?name=${name}&id=${id}`
-				})				
 			},
 			Publish () {
 				if (this.params.content) {
@@ -343,17 +326,6 @@
 		background-color: white;
 		box-shadow: 0px 0 40rpx 0px #dedede;
 		z-index: 999;
-	}
-	.myshop {
-		position: fixed;
-		top: 40%;
-		background-color: rgb(223, 66, 54);
-		right: 5rpx;
-		z-index: 99;
-		border-radius: 20rpx;
-		width: 140rpx;
-		text-align: center;
-		text { color: #FFAD15; font-size: 50rpx;font-weight: bold; }
 	}
 	.box {
 		overflow: hidden;

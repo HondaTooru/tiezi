@@ -9,6 +9,7 @@
 						const c = uni.getStorageSync('collect')
 						const s = uni.getStorageSync('usershop')
 						const x = uni.getStorageSync('contact')
+						const m = uni.getStorageSync('myData')
 						if (x) this.$store.commit('SET_CONTACT', x)
 						if (u) {
 							this.$store.commit('SET_USERINFO', u)
@@ -16,6 +17,7 @@
 							this.$store.commit('SET_LIST', c)
 							this.$store.commit('SET_USERSHOP', s)
 							this.$store.commit('SET_LOGIN', true)
+							this.$store.commit('SET_MYDATA', m)
 						}
 					},
 					fail: err => {

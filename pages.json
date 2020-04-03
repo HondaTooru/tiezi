@@ -44,12 +44,14 @@
 		{
 			"path": "pages/userdata",
 			"style": {
+				"enablePullDownRefresh": false,
 				"navigationBarTitleText": "个人信息"
 			}
 		},
 		{
 			"path": "pages/addData",
 			"style": {
+				"enablePullDownRefresh": false,
 				"navigationBarTitleText": "添加资料"
 			}
 		}		

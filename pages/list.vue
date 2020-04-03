@@ -1,6 +1,6 @@
 <template>
 <view class="compage">
-	<com-share></com-share>
+	<com-share v-if="column_id !== 13"></com-share>
 	<view class="cu-modal" :class="{ show }">
 		<view class="cu-dialog">
 			<view class="cu-bar bg-white justify-end">
@@ -93,7 +93,7 @@
 				</navigator>
 			</block>
 			<block v-if="column_id === 13">
-				<navigator hover-class="none" :url="'/pages/productlist?id='+item.id" class="item" v-for="(item, i) in list" :key="i">
+				<navigator hover-class="none" :url="'/pages/productlist?id='+item.id+'&phone='+item.phone" class="item" v-for="(item, i) in list" :key="i">
 					<view class="el radius bg-red">
 						<view class="title text-xl text-bold text-center">{{ item.title }}</view>
 						<view class="desc text-sm font text-center padding-tb-sm">{{ item.describe }}</view>
