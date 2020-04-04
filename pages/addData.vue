@@ -15,12 +15,12 @@
 			</view>			
 			<view class="cu-form-group">
 				<view class="title">身高</view>
-				<input type="text" placeholder="请输入身高(cm)" v-model="params.height" name="height">
+				<input type="text" placeholder="请输入身高" v-model="params.height" name="height">
 				<view class="cu-tag bg-cyan">cm</view>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">体重</view>
-				<input type="text" placeholder="请输入体重(kg)" v-model="params.weight" name="weight">
+				<input type="text" placeholder="请输入体重" v-model="params.weight" name="weight">
 				<view class="cu-tag bg-cyan">kg</view>
 			</view>
 			<view class="cu-form-group">
