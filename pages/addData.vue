@@ -178,7 +178,7 @@
 			},				
 			marriedChange(e) {
 				this.m_value = e.detail.value
-				this.params.married = this.married[+e.detail.value]
+				this.params.marital = this.married[+e.detail.value]
 			},			
 			cChange (e) {
 				this.c_value = e.detail.value
