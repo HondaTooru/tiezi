@@ -198,8 +198,8 @@
 					this.params.imgurl = details.imgurl instanceof Array ? details.imgurl.join(',') : details.imgurl
 					this.imgList = details.imgurl instanceof Array ? details.imgurl : details.imgurl.split(',')
 				}
-				this.params.region = details.region
-				this.params.column_id = details.column_id
+				if (details.region) this.params.region = details.region
+				if (details.column_id) this.params.column_id = details.column_id
 			}
 			this.params.culture = this.culture[this.c_value]
 			this.params.marital = this.married[this.m_value]

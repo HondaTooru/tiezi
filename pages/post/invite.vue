@@ -21,7 +21,7 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">联系方式</view>
-				<input type="text" placeholder="请输入联系方式" v-model="params.phone" name="phone" />
+				<input type="digit" placeholder="请输入联系方式" v-model="params.phone" name="phone" />
 			</view>
 			<view class="cu-form-group align-start">
 				<view class="title">内容</view>
