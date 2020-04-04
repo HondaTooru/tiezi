@@ -6,7 +6,7 @@
 			</view>
 			<view class="action">
 				<view class="text-grey text-sm">{{ myData.name }}
-				<navigator url="/pages/addData" hover-class="none" class="cu-tag round bg-red margin-left-sm">编辑资料</navigator>
+				<navigator open-type="redirect" url="/pages/addData" hover-class="none" class="cu-tag round bg-red margin-left-sm">编辑资料</navigator>
 				</view>
 			</view>
 		</view>

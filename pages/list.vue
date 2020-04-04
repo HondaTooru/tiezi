@@ -24,7 +24,7 @@
 	</view>		
 	<comTop @on-change="cityChange">
 		<view class="type" slot="head">
-			<view class="item" v-for="(item ,index) in type" :key="index"><view @tap="change" :data-index="index" :class="['atx', { active: currentTab === index }]">{{ item.cate_name }}</view></view>
+			<view class="item" v-for="(item ,index) in type" :key="index"><view @tap="change" :data-index="index" :class="['atx', { active: currentTab === index }]" :style="{ backgroundColor: colorList[index].background || '#c7d2ee', color: colorList[index].color || '#000' }">{{ item.cate_name }}</view></view>
 		</view>		
 	</comTop>
 	<view class="box">
@@ -305,6 +305,77 @@
 <script>
 import { placardCate, placardRanking } from '@/api'
 import { mapGetters, mapActions } from 'vuex'
+const colors = [
+	{
+		id: 1,
+		arr: [
+			{ background: '#fa0101', color: '#000' },
+			{ background: '#ff7b41', color: '#000' },
+			{ background: '#ff8000', color: '#000' }
+		]
+	},	
+	{
+		id: 16,
+		arr: [
+			{ background: '#edc494', color: '#ae2d25' },
+			{ background: '#e4630a', color: '#000' },
+		]
+	},
+	{
+		id: 14,
+		arr: [
+			{ background: '#ff6503', color: '#fff' },
+			{ background: '#b9cde3', color: '#000' },
+			{ background: '#568dd7', color: '#000' }
+		]
+	},
+	{
+		id: 11,
+		arr: [
+			{ background: '#1f438c', color: '#000' },
+			{ background: '#a37e0a', color: '#000' },
+			{ background: '#259322', color: '#000' },
+			{ background: '#3b9703', color: '#000' }
+		]
+	},
+	{
+		id: 49,
+		arr: [
+			{ background: '#1446be', color: '#fff' },
+			{ background: '#3362eb', color: '#fff' }
+		]
+	},
+	{
+		id: 10,
+		arr: [
+			{ background: '#c7e8f1', color: '#000' },
+			{ background: '#c77625', color: '#000' }
+		]
+	},
+	{
+		id: 9,
+		arr: [
+			{ background: '#0403ff', color: '#fff' },
+			{ background: '#3a61ff', color: '#000' },
+			{ background: '#588cd6', color: '#000' }
+		]
+	},
+	{
+		id: 58,
+		arr: [
+			{ background: '#03fefb', color: '#000' },
+			{ background: '#8100ff', color: '#fff' },
+			{ background: '#ff7ffd', color: '#000' }
+		]
+	},
+	{
+		id: 30,
+		arr: [
+			{ background: '#cad7f2', color: '#000' },
+			{ background: '#c1752b', color: '#000' }
+		]
+	}							
+]
 export default {
 	data () {
 		return {
@@ -313,6 +384,7 @@ export default {
 				limit: 10,
 				page:1
 			},
+			colors,
 			params: {
 				first_id: 0,
 				pid: -1,
@@ -356,6 +428,10 @@ export default {
 		},
 		name () {
 			return this.column_id === 13 ? '发布' : '发帖'
+		},
+		colorList () {
+			const list = this.colors.find(item => item.id === this.column_id)
+			return list ? list.arr : []
 		}
 	},
 	watch: {
@@ -443,7 +519,9 @@ export default {
 			const index = e.currentTarget.dataset.index
 			this.category_id = this.type[index].id
 			this.query.page = 1
+			uni.showLoading({ mask: true, title: '加载中' })
 			this.getList(this.category_id).then(res => {
+				uni.hideLoading()
 				this.currentTab = index
 			})
 		},
@@ -603,14 +681,14 @@ export default {
 				padding: 15rpx 0;
 				font-size: 28rpx;
 				box-sizing: border-box;
-				border: 1px solid #6B69D6;
+				border-bottom: 6rpx solid #5b8bc1;
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
-				&.active {
-					color: white;
-					background-color:#516a04;
-				}
+				// &.active {
+				// 	color: white;
+				// 	background-color:#516a04;
+				// }
 			}
 		}
 	}	

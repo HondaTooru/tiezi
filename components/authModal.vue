@@ -34,13 +34,11 @@
 		methods: {
 			change () {
 				this.checked = !this.checked
-				uni.setStorageSync('isRead', this.checked)
 				this.$store.commit('SET_ISREAD', this.checked)
 			},
 			closeModal () {
 				this.$store.commit('SET_SHOWMODAL', false)
-				uni.setStorageSync('isRead', this.false)
-				this.$store.commit('SET_ISREAD', this.false)
+				this.$store.commit('SET_ISREAD', false)
 			},
 			confirmRead () {
 				this.$store.commit('SET_SHOWMODAL', false)

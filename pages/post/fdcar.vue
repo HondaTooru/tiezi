@@ -1,5 +1,6 @@
 <template>
 	<view class="post-car">
+		<com-share></com-share>
 		<form @submit="submit">
 			<view class="cu-form-group">
 				<view class="title">类型</view>
@@ -43,7 +44,7 @@
 			</view>
 			<view class="cu-form-group align-start">
 				<view class="title">内容</view>
-				<textarea placeholder="请输入帖子内容" v-model="params.content" name="content"/>
+				<textarea placeholder="请输入帖子内容" v-model="params.content" name="content"  v-show="!showModal"/>
 			</view>
 			<view class="cu-form-group">
 				<button class="cu-btn bg-red" form-type="submit">{{ params.id ? '更新' : '发表' }}</button>
@@ -55,7 +56,7 @@
 </template>
 
 <script>
-	import { mapActions } from 'vuex'
+	import { mapActions, mapGetters } from 'vuex'
 	import graceChecker from '@/utils/graceChecker'
 	export default {
 		data () {
@@ -63,7 +64,6 @@
 				picker: [],
 				index: 0,
 				time: '12:00',
-				date: '2018-12-25',
 				region: uni.getStorageSync('region'),
 				date: this.$getTime,
 				params: {
@@ -98,7 +98,8 @@
 		computed: {
 			start_time() {
 				return `${this.date} ${this.time}`
-			}
+			},
+			...mapGetters(['showModal'])
 		},
 		methods: {
 			...mapActions(['postContent']),			

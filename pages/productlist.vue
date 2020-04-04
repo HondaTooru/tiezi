@@ -24,7 +24,8 @@
 				<text class="lg text-white cuIcon-phone"></text>
 				<text class="text-white padding-lr-xs">联系方式</text>
 			</view>	
-		</view>		
+		</view>
+		<com-share></com-share>		
 	</view>
 </template>
 

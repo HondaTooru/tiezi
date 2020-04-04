@@ -1,5 +1,6 @@
 <template>
 	<form @submit="submit">
+		<com-share></com-share>
 		<AuthModal/>
 		<view class="cu-form-group">
 			<view class="title">类型</view>
@@ -19,7 +20,7 @@
 		</view>
 		<view class="cu-form-group align-start">
 			<view class="title">店铺描述</view>
-			<textarea value="" placeholder="请输入描述内容" v-model="params.describe" name="describe" />
+			<textarea value="" placeholder="请输入描述内容" v-show="!showModal" v-model="params.describe" name="describe" />
 		</view>
 		<view class="cu-form-group">
 			<view class="title">联系方式</view>
@@ -37,7 +38,7 @@
 </template>
 
 <script>
-	import { mapActions } from 'vuex'
+	import { mapActions, mapGetters } from 'vuex'
 	import graceChecker from '@/utils/graceChecker'
 	export default {
 		data () {
@@ -73,6 +74,9 @@
 				this.params.region = details.region
 				this.params.column_id = details.column_id
 			}
+		},
+		computed: {
+			...mapGetters(['showModal'])
 		},
 		methods: {
 			...mapActions(['postContent']),

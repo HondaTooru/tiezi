@@ -49,6 +49,7 @@
 					uni.navigateTo({
 						url: this.url,
 						success: () => {
+							this.$store.commit('SET_ISREAD', false)
 							uni.setStorageSync('details', {})
 						}
 					})

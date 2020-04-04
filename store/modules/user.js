@@ -34,7 +34,7 @@ const user = {
 		userInfo: {},
 		isLogin: false,
 		showModal: false,
-		isRead: uni.getStorageSync('isRead') || false,
+		isRead: false,
 		address: {},
 		contact: {},
 		tiez: [],
@@ -131,6 +131,7 @@ const user = {
 									showCancel: false,
 									success: () => {
 										uni.navigateBack()
+										commit('SET_ISREAD', false)
 									}
 								 })
 							 })

@@ -1,5 +1,6 @@
 <template>
 <view class="shop-post">
+	<com-share></com-share>
 	<AuthModal/>
 	<form>
 		<view class="cu-bar bg-white margin-top-xs">

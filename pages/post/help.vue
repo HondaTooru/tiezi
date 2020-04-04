@@ -1,5 +1,6 @@
 <template>
 	<view class="post-help">
+		<com-share></com-share>
 		<AuthModal/>
 		<form @submit="submit">		
 			<view class="cu-form-group" v-if="type.length">
@@ -20,7 +21,7 @@
 			</view>
 			<view class="cu-form-group align-start">
 				<view class="title">内容</view>
-				<textarea placeholder="请输入帖子内容" v-model="params.content" name="content"/>
+				<textarea placeholder="请输入帖子内容" v-show="!showModal" v-model="params.content" name="content"/>
 			</view>
 			<view class="cu-form-group">
 				<button class="cu-btn bg-red" form-type="submit">{{ params.id ? '更新' : '发表' }}</button>
@@ -31,7 +32,7 @@
 </template>
 
 <script>
-	import { mapActions } from 'vuex'
+	import { mapActions, mapGetters } from 'vuex'
 	import graceChecker from '@/utils/graceChecker'
 	export default {
 		data () {
@@ -63,6 +64,9 @@
 				this.params.region = details.region
 				this.params.column_id = details.column_id
 			}
+		},
+		computed: {
+			...mapGetters(['showModal'])
 		},
 		methods: {
 			...mapActions(['postContent']),

@@ -1,5 +1,6 @@
 <template>
 	<view class="post-skill">
+		<com-share></com-share>
 		<AuthModal/>
 		<form @submit="submit">	
 			<view class="cu-bar bg-white margin-top-xs">

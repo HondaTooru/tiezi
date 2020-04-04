@@ -33,7 +33,7 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">手机号码</view>
-				<input type="text" placeholder="请输入手机号码" v-model="params.phone" name="phone">
+				<input type="digit" placeholder="请输入手机号码" v-model="params.phone" name="phone">
 			</view>						
 			<view class="cu-form-group">
 				<view class="title">籍贯</view>

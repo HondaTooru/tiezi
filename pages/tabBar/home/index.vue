@@ -70,6 +70,17 @@
 				</view>				
 			</view>
 		</view>
+<!-- 		<view class="cu-bar foot input" :style="[{bottom:InputBottom+'px'}]">
+			<view class="action">
+				<text class="cuIcon-sound text-grey"></text>
+			</view>
+			<input class="solid-bottom" :adjust-position="false" :focus="false" maxlength="300" cursor-spacing="10"
+			 @focus="InputFocus" @blur="InputBlur"></input>
+			<view class="action">
+				<text class="cuIcon-emojifill text-grey"></text>
+			</view>
+			<button class="cu-btn bg-green shadow">发送</button>
+		</view>	 -->
 		<view class="cu-modal" :class="{ show }">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">
@@ -90,7 +101,8 @@
 					</form>
 				</view>
 			</view>
-		</view>
+		</view>			
+		<com-share></com-share>
 	</view>
 </template>
 
@@ -112,6 +124,7 @@
 		},
 		data () {
 			return {
+				InputBottom: 0,
 				shareItem: {},
 				show: false,
 				action: false,
@@ -144,6 +157,12 @@
 					indicator: 'number'
 				})
 			},
+			InputFocus(e) {
+				this.InputBottom = e.detail.height
+			},
+			InputBlur(e) {
+				this.InputBottom = 0
+			},			
 			Publish () {
 				if (this.params.content) {
 					uni.showLoading({ mask: true, title: '请稍后' })

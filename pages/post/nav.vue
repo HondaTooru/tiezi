@@ -1,5 +1,6 @@
 <template>
 	<view class="nav-post">
+		<com-share></com-share>
 		<AuthModal/>
 		<form @submit="submit">
 			<view class="cu-bar bg-white margin-top-xs">
@@ -41,7 +42,8 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">身高</view>
-				<input type="text" placeholder="请输入身高(cm)" v-model="params.height">
+				<input type="text" placeholder="请输入身高" v-model="params.height">
+				<view class="cu-tag bg-cyan">cm</view>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">性别</view>
@@ -53,7 +55,8 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">体重</view>
-				<input type="text" placeholder="请输入体重(kg)" v-model="params.weight">
+				<input type="text" placeholder="请输入体重" v-model="params.weight">
+				<view class="cu-tag bg-cyan">kg</view>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">QQ</view>
@@ -82,6 +85,7 @@
 			<view class="cu-form-group">
 				<view class="title">年收入</view>
 				<input type="text" placeholder="请输入年收入" v-model="params.income">
+				<view class="cu-tag bg-cyan">万元</view>
 			</view>
 			<view class="cu-form-group">
 				<view class="title">文化程度</view>
@@ -109,7 +113,7 @@
 			</view>
 			<view class="cu-form-group align-start">
 				<view class="title">内容</view>
-				<textarea placeholder="请输入内容" v-model="params.content" name="content" />
+				<textarea placeholder="请输入内容" v-show="!showModal" v-model="params.content" name="content" />
 			</view>
 			<view class="cu-form-group">
 				<button class="cu-btn bg-red" form-type="submit">{{ params.id ? '更新' : '发表' }}</button>
@@ -121,7 +125,7 @@
 
 <script>
 	import graceChecker from '@/utils/graceChecker'
-	import { mapActions } from 'vuex'
+	import { mapActions, mapGetters } from 'vuex'
 	export default {
 		data () {
 			return {
@@ -162,7 +166,7 @@
 		},
 		onLoad(options) {
 			const getStorege = uni.getStorageSync('details')
-			const details = (getStorege && JSON.stringify(getStorege) !== '{}') ? getStorege : uni.getStorageSync('UserDetails')
+			const details = (getStorege && JSON.stringify(getStorege) !== '{}') ? getStorege : uni.getStorageSync('myData')
 			const type = uni.getStorageSync('cate')
 			this.type = type
 			this.params.region = uni.getStorageSync('region')
@@ -171,7 +175,6 @@
 			if (details && JSON.stringify(details) !== '{}') {
 				if (details.id !== void 0) this.params.id = details.id
 				this.params.title = details.title
-				this.params.imgurl = details.imgurl instanceof Array ? details.imgurl.join(',') : details.imgurl
 				this.params.name = details.name
 				this.params.height = details.height
 				this.params.weight = details.weight
@@ -185,12 +188,18 @@
 				this.params.phone = details.phone
 				this.params.cardId = details.cardId
 				this.params.content = details.content
-				this.imgList = details.imgurl instanceof Array ? details.imgurl : details.imgurl.split(',')
+				if (details.imgurl !== void 0) {
+					this.params.imgurl = details.imgurl instanceof Array ? details.imgurl.join(',') : details.imgurl
+					this.imgList = details.imgurl instanceof Array ? details.imgurl : details.imgurl.split(',')
+				}
 				this.params.region = details.region
 				this.params.column_id = details.column_id
 			}
 			this.params.culture = this.culture[this.c_value]
 			this.params.marital = this.married[this.m_value]
+		},
+		computed: {
+			...mapGetters(['showModal'])
 		},
 		methods: {
 			...mapActions(['uploadImage', 'postContent']),
@@ -205,9 +214,7 @@
 				if (checkRes) {
 					this.params.imgurl = this.imgList.join(',')
 					if (this.imgList.length >= 3) {
-						this.postContent(this.params).then(res => {
-							uni.setStorageSync('UserDetails', this.params)
-						})
+						this.postContent(this.params)
 					} else {
 						uni.showModal({
 							content: '请上传至少3张图片',
