@@ -166,7 +166,13 @@
 		},
 		onLoad(options) {
 			const getStorege = uni.getStorageSync('details')
-			const details = (getStorege && JSON.stringify(getStorege) !== '{}') ? getStorege : uni.getStorageSync('myData')
+			let details = {}
+			if (getStorege && JSON.stringify(getStorege) !== '{}') {
+				details = getStorege
+			} else {
+				details = uni.getStorageSync('myData')
+				delete details.id
+			}
 			const type = uni.getStorageSync('cate')
 			this.type = type
 			this.params.region = uni.getStorageSync('region')
