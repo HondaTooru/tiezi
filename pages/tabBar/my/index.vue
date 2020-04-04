@@ -31,7 +31,7 @@
 						<view class="cu-list menu">
 							<view class="cu-item" v-for="(item, i) in list" :key="i">
 								<view class="content">
-									<navigator class="text-sm text-cut" :url="'/pages/detail?placard_id='+item.id+'&column_id='+item.column_id">{{ item.title || item.content }}</navigator>
+									<navigator class="text-sm text-cut" :url="'/pages/detail?placard_id='+(!act ? item.id : item.collect_id)+'&column_id='+item.column_id">{{ item.title || item.content }}</navigator>
 								</view>
 								<view class="action">
 									<view class="cu-tag round bg-red" @tap="toTop(item)" v-if="!act">置顶</view>
