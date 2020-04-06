@@ -24,7 +24,7 @@
 	</view>		
 	<comTop @on-change="cityChange">
 		<view class="type" slot="head">
-			<view class="item" v-for="(item ,index) in type" :key="index"><view @tap="change" :data-index="index" :class="['atx', { active: currentTab === index }]" :style="{ backgroundColor: colorList[index].background || '#c7d2ee', color: colorList[index].color || '#000' }">{{ item.cate_name }}</view></view>
+			<view class="item" v-for="(item ,index) in type" :key="index"><view @tap="change" :data-index="index" :class="['atx', { active: currentTab === index }, { dx: column_id === 16 && item.id === '39' }]">{{ item.cate_name }}</view></view>
 		</view>		
 	</comTop>
 	<view class="box">
@@ -42,7 +42,7 @@
 						</swiper-item>
 					</swiper>
 					<view class="flex align-center margin-tb-sm btm justify-between">
-						<view class="flex"><view class="cu-tag bg-red margin-right-xs">{{ item.category }}</view><view class="text-cut">{{ item.title }}</view></view>
+						<view class="flex align-center"><view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.category }}</view><view class="text-cut">{{ item.title }}</view></view>
 						<view class="more" @tap.stop="tapAction(item, index)"></view>
 						<view class="tool" v-if="item.show">
 							<userAuth @tap.stop=""></userAuth>
@@ -57,7 +57,7 @@
 			<block v-if="column_id === 14">
 				<navigator hover-class="none" :url="'/pages/detail?placard_id='+item.id+'&column_id='+item.column_id" class="item margin-tb-sm padding-sm bg-white" :class="{'shadow': i !== list.length - 1}" v-for="(item, i) in list" :key="i">
 					<view class="flex justify-between">
-						<view class="cu-tag bg-grey">{{ item.category }}</view>
+						<view class="cu-tag" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.category }}</view>
 						<view class="cu-steps steps-arrow">
 							<view class="cu-item padding-lr">
 								<view class="cu-tag bg-sea padding-lr">{{ item.address_start }}</view>
@@ -85,7 +85,7 @@
 							</view>							
 							<view class="cu-tag bg-grey"><text class="cuIcon-phone"></text></view>
 							<view class="flex">
-								<view class="cu-tag line-grey">{{ item.phone }}</view>
+								<view class="cu-tag line-grey" @tap.stop="makeCall(item.phone)">{{ item.phone }}</view>
 								<view class="more margin-left-xs" @tap.stop="tapAction(item, index)"></view>
 							</view>
 						</view>
@@ -99,7 +99,7 @@
 						<view class="desc text-sm font text-center padding-tb-sm">{{ item.describe }}</view>
 						<view class="text-black flex justify-between">
 							<view class="margin-top-xs text-xs text-cut"><text class="cuIcon-location padding-right-xs"></text>{{ item.region }}</view>
-							<view class="margin-top-xs text-xs"><text class="cuIcon-phone padding-right-xs"></text>{{ item.phone }}</view>
+							<view class="margin-top-xs text-xs" @tap.stop="makeCall(item.phone)"><text class="cuIcon-phone padding-right-xs"></text>{{ item.phone }}</view>
 						</view>								
 					</view>
 				</navigator>				
@@ -128,7 +128,7 @@
 						<view class="flex justify-between">
 							<view class="flex justify-between">
 								<view class="margin-top-xs margin-right-xs"><text class="cuIcon-location padding-right-xs"></text>{{ item.region }}</view>
-								<view class="margin-top-xs margin-right-xs"><text class="cuIcon-phone padding-right-xs"></text>{{ item.phone }}</view>
+								<view class="margin-top-xs margin-right-xs" @tap.stop="makeCall(item.phone)"><text class="cuIcon-phone padding-right-xs"></text>{{ item.phone }}</view>
 							</view>
 						</view>
 						<view class="more margin-left-xs" @tap.stop="tapAction(item, index)"></view>
@@ -150,14 +150,14 @@
 							<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
 							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
 						</view>							
-						<view class="flex"><view class="cu-tag bg-red margin-right-xs">{{ item.column }}</view><view class="text-cut">{{ item.title }}</view></view>
+						<view class="flex"><view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.column }}</view><view class="text-cut">{{ item.title }}</view></view>
 						<view class="more margin-left-xs" @tap.stop="tapAction(item, index)"></view>
 					</view>
 				</navigator>				
 			</block>
 			<block v-if="column_id === 9">
 				<navigator hover-class="none" :url="'/pages/detail?placard_id='+item.id+'&column_id='+item.column_id" class="flex align-center padding-tb-xs" v-for="(item, i) in list" :key="i">
-					<view class="cu-tag bg-red">{{ item.category }}</view>
+					<view class="cu-tag" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.category }}</view>
 					<view class="flex-sub text-cut padding-lr-xs">{{ item.title }}</view>
 					<button class="cu-btn cuIcon" @tap.stop="makeCall(item.phone)">
 						<text class="cuIcon-phone"></text>
@@ -183,7 +183,7 @@
 							</swiper-item>
 					</swiper>
 					<view class="flex align-center padding-tb-xs btm">
-						<view class="cu-tag bg-red">{{ item.category }}</view>
+						<view class="cu-tag" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.category }}</view>
 						<view class="flex-sub text-cut padding-lr-xs">{{ item.title }}</view>
 						<button class="cu-btn cuIcon" @tap.stop="makeCall(item.phone)">
 							<text class="cuIcon-phone"></text>
@@ -202,7 +202,7 @@
 			<block v-if="column_id === 1">
 				<navigator hover-class="none" class="padding-bottom-xs" :url="'/pages/detail?placard_id='+item.id+'&column_id='+item.column_id" v-for="(item, i) in list" :key="i" :class="{ 'solid-bottom': i !== list.length - 1 }">
 					<view class="flex align-center padding-tb-xs btm">
-						<view class="cu-tag bg-red margin-right-xs">{{ item.category }}</view>
+						<view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.category }}</view>
 						<view class="text-cut flex-sub">{{ item.title }}</view>
 						<view class="flex justify-between margin-top-xs">
 							<button class="cu-btn cuIcon sm" @tap.stop="makeCall(item.phone)">
@@ -223,7 +223,7 @@
 			<block v-if="column_id === 6">
 				<navigator hover-class="none" :url="'/pages/detail?placard_id='+item.id+'&column_id='+item.column_id" v-for="(item, i) in list" :key="i" class="padding-tb-sm" :class="{ 'solid-bottom': i !== list.length - 1 }">
 					<view class="flex align-center btm">
-						<view class="cu-tag bg-red">{{ item.category }}</view>
+						<view class="cu-tag" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.category }}</view>
 						<view class="flex-sub text-cut padding-lr-xs">{{ item.title }}</view>
 <!-- 						<button class="cu-btn cuIcon" @tap.stop="makeCall(item.phone)">
 							<text class="cuIcon-phone"></text>
@@ -247,13 +247,13 @@
 						</swiper-item>
 					</swiper>
 					<view class="flex align-center margin-tb-xs">
-						<view class="cu-tag bg-red margin-right-xs">{{ item.category }}</view>
+						<view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.category }}</view>
 						<view class="text-cut">{{ item.title }}</view>
 					</view>
 					<view class="flex btm margin-bottom-xs align-center justify-between">
 						<view class="flex">
 							<view class="margin-top-xs margin-right-xs"><text class="cuIcon-location padding-right-xs"></text>{{ item.region }}</view>
-							<view v-if="item.phone" class="margin-top-xs margin-right-xs"><text class="cuIcon-phone padding-right-xs"></text>{{ item.phone }}</view>
+							<view v-if="item.phone" class="margin-top-xs margin-right-xs" @tap.stop="makeCall(item.phone)"><text class="cuIcon-phone padding-right-xs"></text>{{ item.phone }}</view>
 						</view>
 						<view class="tool" v-if="item.show">
 							<userAuth @tap.stop=""></userAuth>
@@ -276,7 +276,7 @@
 					<view class="margin-sm">
 						<view class="flex align-center justify-between btm">
 							<view class="flex flex-sub">
-								<view class="cu-tag bg-red margin-right-xs">{{ item.category }}</view>
+								<view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.category }}</view>
 								<view class="text-cut">{{ item.title }}</view>
 							</view>
 							<view class="tool" v-if="item.show">
@@ -290,7 +290,7 @@
 						</view>
 						<view class="flex justify-between margin-top-xs text-gray">
 							<view class="flex align-center"><text class="cuIcon-location padding-right-xs"></text><text class="text-xs">{{ item.region }}</text></view>
-							<view class="flex align-center"><text class="cuIcon-phone padding-right-xs"></text><text class="text-xs">{{ item.phone }}</text></view>
+							<view class="flex align-center"><text class="cuIcon-phone padding-right-xs"></text><text class="text-df" @tap.stop="makeCall(item.phone)">{{ item.phone }}</text></view>
 						</view>
 					</view>
 				</navigator>
@@ -305,77 +305,78 @@
 <script>
 import { placardCate, placardRanking } from '@/api'
 import { mapGetters, mapActions } from 'vuex'
-const colors = [
-	{
-		id: 1,
-		arr: [
-			{ background: '#fa0101', color: '#000' },
-			{ background: '#ff7b41', color: '#000' },
-			{ background: '#ff8000', color: '#000' }
-		]
-	},	
-	{
-		id: 16,
-		arr: [
-			{ background: '#edc494', color: '#ae2d25' },
-			{ background: '#e4630a', color: '#000' },
-		]
-	},
-	{
-		id: 14,
-		arr: [
-			{ background: '#ff6503', color: '#fff' },
-			{ background: '#b9cde3', color: '#000' },
-			{ background: '#568dd7', color: '#000' }
-		]
-	},
-	{
-		id: 11,
-		arr: [
-			{ background: '#1f438c', color: '#000' },
-			{ background: '#a37e0a', color: '#000' },
-			{ background: '#259322', color: '#000' },
-			{ background: '#3b9703', color: '#000' }
-		]
-	},
-	{
-		id: 49,
-		arr: [
-			{ background: '#1446be', color: '#fff' },
-			{ background: '#3362eb', color: '#fff' }
-		]
-	},
-	{
-		id: 10,
-		arr: [
-			{ background: '#c7e8f1', color: '#000' },
-			{ background: '#c77625', color: '#000' }
-		]
-	},
-	{
-		id: 9,
-		arr: [
-			{ background: '#0403ff', color: '#fff' },
-			{ background: '#3a61ff', color: '#000' },
-			{ background: '#588cd6', color: '#000' }
-		]
-	},
-	{
-		id: 58,
-		arr: [
-			{ background: '#03fefb', color: '#000' },
-			{ background: '#8100ff', color: '#fff' },
-			{ background: '#ff7ffd', color: '#000' }
-		]
-	},
-	{
-		id: 30,
-		arr: [
-			{ background: '#cad7f2', color: '#000' },
-			{ background: '#c1752b', color: '#000' }
-		]
-	}							
-]
+	const colors = [
+		{
+			id: 1,
+			arr: [
+				{ background: '#fa0101', color: '#000', name: '上门帮忙' },
+				{ background: '#ff7b41', color: '#000', name: '小时工' },
+				{ background: '#ff8000', color: '#000', name: '安装维修' }
+			]
+		},	
+		{
+			id: 16,
+			arr: [
+				{ background: '#edc494', color: '#ae2d25', name: '本地交友' },
+				{ background: '#e4630a', color: '#000', name: '实名相亲' },
+			]
+		},
+		{
+			id: 14,
+			arr: [
+				{ background: '#ff6503', color: '#fff', name: '车找人' },
+				{ background: '#b9cde3', color: '#000', name: '人找车' },
+				{ background: '#568dd7', color: '#000', name: '货找车' }
+			]
+		},
+		{
+			id: 11,
+			arr: [
+				{ background: '#1f438c', color: '#000', name: '水产畜牧' },
+				{ background: '#a37e0a', color: '#000', name: '小吃零食' },
+				{ background: '#259322', color: '#000', name: '农家干货' },
+				{ background: '#3b9703', color: '#000', name: '绿色水果' }
+			]
+		},
+		{
+			id: 49,
+			arr: [
+				{ background: '#1446be', color: '#fff', name: '独特技能' },
+				{ background: '#3362eb', color: '#fff', name: '祖传秘方' }
+			]
+		},
+		{
+			id: 10,
+			arr: [
+				{ background: '#c7e8f1', color: '#000', name: '转让' },
+				{ background: '#c77625', color: '#000', name: '出租' }
+			]
+		},
+		{
+			id: 9,
+			arr: [
+				{ background: '#0403ff', color: '#fff', name: '求职' },
+				{ background: '#3a61ff', color: '#000', name: '招聘' },
+				{ background: '#588cd6', color: '#000', name: '招生' }
+			]
+		},
+		{
+			id: 58,
+			arr: [
+				{ background: '#03fefb', color: '#000', name: '二手市场' },
+				{ background: '#8100ff', color: '#fff', name: '供应' },
+				{ background: '#ff7ffd', color: '#000', name: '需求' }
+			]
+		},
+		{
+			id: 30,
+			arr: [
+				{ background: '#cad7f2', color: '#000', name: '求租' },
+				{ background: '#c1752b', color: '#000', name: '出租' }
+			]
+		}							
+	]	
+
 export default {
 	data () {
 		return {
@@ -384,7 +385,6 @@ export default {
 				limit: 10,
 				page:1
 			},
-			colors,
 			params: {
 				first_id: 0,
 				pid: -1,
@@ -428,10 +428,6 @@ export default {
 		},
 		name () {
 			return this.column_id === 13 ? '发布' : '发帖'
-		},
-		colorList () {
-			const list = this.colors.find(item => item.id === this.column_id)
-			return list ? list.arr : []
 		}
 	},
 	watch: {
@@ -551,7 +547,17 @@ export default {
 				placardRanking({ column_id: this.column_id, category_id, ...this.query, region: uni.getStorageSync('region') }).then(res =>{
 					if (this.query.page === 1) this.list = []
 					const list = res.data.data.map(item => {
+						item.column_id = +item.column_id
 						item.show = false
+						const el = colors.find(k => k.id === item.column_id)
+						if (el !== void 0) {
+							const o = el.arr.find(a => a.name === item.category)
+							item.background = o !== void 0 ? o.background : '#467acf'
+							item.color = o !== void 0 ? o.color : '#000'
+						} else {
+							item.background = '#467acf'
+							item.color = '#000'
+						}						
 						return item
 					})
 					this.list = [...this.list, ...list]
@@ -681,14 +687,19 @@ export default {
 				padding: 15rpx 0;
 				font-size: 28rpx;
 				box-sizing: border-box;
-				border-bottom: 6rpx solid #5b8bc1;
+				border: 2rpx solid #5b8bc1;
 				white-space: nowrap;
 				overflow: hidden;
 				text-overflow: ellipsis;
-				// &.active {
-				// 	color: white;
-				// 	background-color:#516a04;
-				// }
+				&.dx {
+					color: #eaeaea;
+					background-color: #c1c1c1;
+					border: 0 none;
+				}
+				&.active {
+					color: white;
+					background-color:#516a04;
+				}
 			}
 		}
 	}	

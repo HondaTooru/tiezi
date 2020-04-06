@@ -1,6 +1,5 @@
 <template>
 <view class="product-post">
-	<com-share></com-share>
 	<AuthModal/>
 	<form @submit="submit">
 		<view class="cu-form-group">

@@ -1,6 +1,5 @@
 <template>
 	<form @submit="submit">
-		<com-share></com-share>
 		<AuthModal/>
 		<view class="cu-form-group">
 			<view class="title">类型</view>

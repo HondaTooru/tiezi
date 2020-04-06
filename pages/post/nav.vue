@@ -33,10 +33,6 @@
 				</picker>				
 			</view>
 			<view class="cu-form-group">
-				<view class="title">标题</view>
-				<input type="text" placeholder="请输入标题" v-model="params.title" name="title">
-			</view>
-			<view class="cu-form-group">
 				<view class="title">姓名</view>
 				<input type="text" placeholder="请输入姓名" v-model="params.name" name="name">
 			</view>
@@ -111,6 +107,10 @@
 					</view>
 				</picker>
 			</view>
+			<view class="cu-form-group">
+				<view class="title">标题</view>
+				<input type="text" placeholder="请输入标题" v-model="params.title" name="title">
+			</view>			
 			<view class="cu-form-group align-start">
 				<view class="title">内容</view>
 				<textarea placeholder="请输入内容" v-show="!showModal" v-model="params.content" name="content" />
@@ -174,7 +174,7 @@
 				delete details.id
 			}
 			const type = uni.getStorageSync('cate')
-			this.type = type
+			this.type = type.filter(item => +item.id !== 39)
 			this.params.region = uni.getStorageSync('region')
 			this.params.column_id = uni.getStorageSync('nav').id
 			this.params.category_id = this.type.length ? type[0].id : this.params.column_id

@@ -27,7 +27,7 @@
 							<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
 							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
 						</view>
-						<view class="flex align-center justify-between"><view class="cu-tag bg-red margin-right-xs">{{ item.cate_name }}</view><view class="flex-sub text-cut" @tap="toDetail" :data-item="item" @longpress.stop="LongPress(index)">{{ item.title }}</view>
+						<view class="flex align-center justify-between"><view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.cate_name }}</view><view class="flex-sub text-cut" @tap="toDetail" :data-item="item" @longpress.stop="LongPress(index)">{{ item.title }}</view>
 						<view class="more" @tap.stop="tapAction(item, index)"></view>
 						</view>
 						<view v-if="!item.imgurl">
@@ -35,13 +35,13 @@
 						</view>
 						<view class="flex justify-between margin-top-xs text-gray padding-bottom-xs">
 							<view class="flex align-center"><text class="cuIcon-location padding-right-xs"></text><text class="text-xs">{{ item.region }}</text></view>
-							<view class="flex align-center" v-if="item.phone"><text class="cuIcon-phone padding-right-xs"></text><text class="text-xs">{{ item.phone }}</text></view>
+							<view class="flex align-center" v-if="item.phone"><text class="cuIcon-phone padding-right-xs"></text><text class="text-df" @tap="makeCallPhone(item.phone)">{{ item.phone }}</text></view>
 						</view>
 					</view>
 				</view>
 				<view class="item margin-tb-sm padding-sm bg-white solid-bottom" v-else @tap="toDetail" :data-item="item">
 					<view class="flex justify-between">
-						<view class="cu-tag bg-grey">{{ item.cate_name }}</view>
+						<view class="cu-tag bg-grey" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.cate_name }}</view>
 						<view class="cu-steps steps-arrow">
 							<view class="cu-item padding-lr">
 								<view class="cu-tag bg-sea padding-lr">{{ item.address_start }}</view>
@@ -62,7 +62,7 @@
 						<view class="flex align-center">
 							<view class="cu-capsule radius">
 								<view class="cu-tag bg-grey"><text class="cuIcon-phone"></text></view>
-								<view class="cu-tag line-grey">{{ item.phone }}</view>
+								<view class="cu-tag line-grey" @tap.stop="makeCallPhone(item.phone)">{{ item.phone }}</view>
 							</view>
 							<view class="padding-left-sm" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill text-sea"></text></view>
 						</view>
@@ -113,6 +113,77 @@
 	import { getIndexCate, placardList } from '@/api'
 	import { mapActions } from 'vuex'
 	const qqMapSdk = new qqMap({ key: 'TEDBZ-3JWEX-TRZ45-76W7H-BPKXV-E6BAS' })
+	const colors = [
+		{
+			id: 1,
+			arr: [
+				{ background: '#fa0101', color: '#000', name: '上门帮忙' },
+				{ background: '#ff7b41', color: '#000', name: '小时工' },
+				{ background: '#ff8000', color: '#000', name: '安装维修' }
+			]
+		},	
+		{
+			id: 16,
+			arr: [
+				{ background: '#edc494', color: '#ae2d25', name: '本地交友' },
+				{ background: '#e4630a', color: '#000', name: '实名相亲' },
+			]
+		},
+		{
+			id: 14,
+			arr: [
+				{ background: '#ff6503', color: '#fff', name: '车找人' },
+				{ background: '#b9cde3', color: '#000', name: '人找车' },
+				{ background: '#568dd7', color: '#000', name: '货找车' }
+			]
+		},
+		{
+			id: 11,
+			arr: [
+				{ background: '#1f438c', color: '#000', name: '水产畜牧' },
+				{ background: '#a37e0a', color: '#000', name: '小吃零食' },
+				{ background: '#259322', color: '#000', name: '农家干货' },
+				{ background: '#3b9703', color: '#000', name: '绿色水果' }
+			]
+		},
+		{
+			id: 49,
+			arr: [
+				{ background: '#1446be', color: '#fff', name: '独特技能' },
+				{ background: '#3362eb', color: '#fff', name: '祖传秘方' }
+			]
+		},
+		{
+			id: 10,
+			arr: [
+				{ background: '#c7e8f1', color: '#000', name: '转让' },
+				{ background: '#c77625', color: '#000', name: '出租' }
+			]
+		},
+		{
+			id: 9,
+			arr: [
+				{ background: '#0403ff', color: '#fff', name: '求职' },
+				{ background: '#3a61ff', color: '#000', name: '招聘' },
+				{ background: '#588cd6', color: '#000', name: '招生' }
+			]
+		},
+		{
+			id: 58,
+			arr: [
+				{ background: '#03fefb', color: '#000', name: '二手市场' },
+				{ background: '#8100ff', color: '#fff', name: '供应' },
+				{ background: '#ff7ffd', color: '#000', name: '需求' }
+			]
+		},
+		{
+			id: 30,
+			arr: [
+				{ background: '#cad7f2', color: '#000', name: '求租' },
+				{ background: '#c1752b', color: '#000', name: '出租' }
+			]
+		}							
+	]	
 	export default {
 		name: 'home',
 		onShareAppMessage (res) {},
@@ -207,6 +278,11 @@
 				this.x = this.x.map((t, _) => {
 					t.show = index === _ ? !item.show : false
 					return t
+				})
+			},
+			makeCallPhone(phoneNumber) {
+				uni.makePhoneCall({
+					phoneNumber
 				})
 			},
 			async moreAction(type, item) {
@@ -317,6 +393,15 @@
 						this.x = res.data.map(item => {
 							item.column_id = +item.column_id
 							item.show = false
+							const el = colors.find(k => k.id === item.column_id)
+							if (el !== void 0) {
+								const o = el.arr.find(a => a.name === item.cate_name)
+								item.background = o !== void 0 ? o.background : '#467acf'
+								item.color = o !== void 0 ? o.color : '#000'
+							} else {
+								item.background = '#467acf'
+								item.color = '#000'
+							}
 							if (item.column_id !== 14 && item.imageUrl) while (item.imgurl.length < 3) item.imgurl.push('/static/no_pic.png')
 							return item
 						})

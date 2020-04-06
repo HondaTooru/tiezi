@@ -57,7 +57,7 @@
 					<view class="flex justify-end padding-sm">
 						<view class="flex">
 							<view class="cu-btn bg-red sm">置顶店铺</view>
-							<navigator :url="'/pages/post/product?id='+item.id" hover-class="none" class="cu-btn bg-orange sm margin-left-sm" @tap="toProductList(item)">发布产品</navigator>
+							<navigator :url="'/pages/post/product?id='+item.id" hover-class="none" class="cu-btn bg-orange sm margin-left-sm">发布产品</navigator>
 							<view class="cu-btn bg-yellow sm margin-left-sm" @tap="toProductList(item)">更多产品</view>
 							<view class="action margin-left-sm">
 								<view class="cu-btn bg-sea sm" @tap="editShop(item)">编辑店铺</view>
