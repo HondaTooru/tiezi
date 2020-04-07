@@ -138,6 +138,7 @@
 					url: `/pages/post/shop`,
 					success: () => {
 						uni.setStorageSync('details', item)
+						uni.setStorageSync('nav', { name: '本地店铺', id: +item.column_id })
 					}
 				})
 				uni.hideLoading()				
@@ -147,7 +148,10 @@
 				this.column_id = +item.column_id
 				await this.getCate()
 				uni.navigateTo({
-					url: `/pages/productlist?id=${item.id}`
+					url: `/pages/productlist?id=${item.id}`,
+					success: () => {
+						uni.setStorageSync('nav', { name: '本地店铺', id: +item.column_id })
+					}
 				})
 				uni.hideLoading()
 			},
