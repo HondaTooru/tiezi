@@ -33,7 +33,7 @@
 				</view>
 				<view class="cu-form-group">
 					<view class="title">联系方式</view>
-					<view class="call">{{ u.phone }}<text class="margin-left-sm text-sea cuIcon-phone" @tap="callPhone"></text></view>
+					<view class="call" @tap="callPhone">{{ u.phone }}<text class="margin-left-sm text-sea cuIcon-phone"></text></view>
 				</view>
 			</form>			
 		</view>
@@ -90,8 +90,8 @@
 						<view class="margin-top-sm margin-bottom-xs">{{ item.content }}</view>
 					</view>					
 				</view>
-				<view class="flex justify-between text-gray">
-					<view class="flex align-center"><text class="cuIcon-appreciate text-xl padding-right-xs"></text><text class="text-xs">{{ item.fabulous }}</text></view>
+				<view class="flex justify-end text-gray">
+					<!-- <view class="flex align-center"><text class="cuIcon-appreciate text-xl padding-right-xs"></text><text class="text-xs">{{ item.fabulous }}</text></view> -->
                     <view class="padding-left-sm" @tap.stop="moreAction(item)"><text class="cuIcon-messagefill text-sea"></text></view>
 				</view>
 				<view class="margin-left-lg text-sm margin-top-sm bg-gray padding-sm" v-if="item._childList.length">
