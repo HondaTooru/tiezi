@@ -28,7 +28,7 @@
 				<view class="title">选择类型</view>
 				<picker @change="PickerChange" :value="index" :range="type" range-key="cate_name">
 					<view class="picker">
-						{{type[index].cate_name}}
+						{{ index === -1 ? '请选择' : type[index].cate_name }}
 					</view>
 				</picker>				
 			</view>
@@ -64,7 +64,7 @@
 			</view>
 			<view class="cu-form-group">
 				<view class="title">手机号码</view>
-				<input type="text" placeholder="请输入手机号码" v-model="params.phone">
+				<input type="digit" placeholder="请输入手机号码" v-model="params.phone">
 			</view>						
 			<view class="cu-form-group">
 				<view class="title">籍贯</view>
@@ -136,7 +136,7 @@
 				m_value: 0,
 				c_value: 0,
 				sex: ['保密','男', '女'],
-				index: 0,
+				index: -1,
 				s_value: 0,
 				currentTab: 0,
 				region: uni.getStorageSync('region'),
@@ -177,7 +177,6 @@
 			this.type = type.filter(item => +item.id !== 39)
 			this.params.region = uni.getStorageSync('region')
 			this.params.column_id = uni.getStorageSync('nav').id
-			this.params.category_id = this.type.length ? type[0].id : this.params.column_id
 			if (details && JSON.stringify(details) !== '{}') {
 				if (details.id !== void 0) this.params.id = details.id
 				this.params.title = details.title
@@ -218,14 +217,18 @@
 				const formData = e.detail.value
 				const checkRes = graceChecker.check(formData, rule)
 				if (checkRes) {
-					this.params.imgurl = this.imgList.join(',')
-					if (this.imgList.length >= 3) {
-						this.postContent(this.params)
+					if (this.params.category_id !== '') {
+						this.params.imgurl = this.imgList.join(',')
+						if (this.imgList.length >= 3) {
+							this.postContent(this.params)
+						} else {
+							uni.showModal({
+								content: '请上传至少3张图片',
+								showCancel: false
+							})						
+						}
 					} else {
-						uni.showModal({
-							content: '请上传至少3张图片',
-							showCancel: false
-						})						
+						uni.showToast({ title: '请选择分类', icon: 'none' })
 					}
 				} else {
 					uni.showToast({ title: graceChecker.error, icon: "none" })

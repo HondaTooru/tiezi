@@ -6,7 +6,7 @@
 			<view class="title">类型</view>
 			<picker @change="PickerChange" :value="index" :range="type" range-key="cate_name">
 				<view class="picker">
-					{{type[index].cate_name}}
+					{{index === -1 ? '请选择' : type[index].cate_name}}
 				</view>
 			</picker>				
 		</view>			
@@ -46,7 +46,7 @@
 		data () {
 			return {
 				imgList: [],
-				index: 0,
+				index: -1,
 				type: [],
 				params: {
 					type: -2,

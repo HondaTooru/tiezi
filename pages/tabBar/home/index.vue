@@ -10,6 +10,18 @@
 					<image :src="item.pic" mode="aspectFill"></image>
 				</swiper-item>
 			</swiper>
+			<view class="shop">
+				<navigator hover-class="none" :url="'/pages/productlist?id='+item.id+'&phone='+item.phone" class="item" v-for="(item, i) in shopList" :key="i">
+					<view class="el radius bg-red flex flex-direction justify-between">
+						<view class="title text-xl text-bold text-center">{{ item.title }}</view>
+						<view class="desc text-sm font text-center margin-tb-sm">{{ item.describe }}</view>
+						<view class="text-black flex justify-between">
+							<view class="margin-top-xs text-xs text-cut"><text class="cuIcon-location padding-right-xs"></text>{{ item.region }}</view>
+							<view class="margin-top-xs text-xs" @tap.stop="makeCall(item.phone)"><text class="cuIcon-phone padding-right-xs"></text>{{ item.phone }}</view>
+						</view>								
+					</view>
+				</navigator>
+			</view>
 			<view class="list margin-top-sm padding-bottom-xs margin-bottom-sm">
 				<view class="item solid-bottom" v-for="(item, index) in x" :key="index" v-if="item.column_id !== 14">
 					<block v-if="item.imgurl">
@@ -197,6 +209,7 @@
 			return {
 				InputBottom: 0,
 				shareItem: {},
+				shopList: [],
 				show: false,
 				action: false,
 				cItem: {},
@@ -404,7 +417,8 @@
 							}
 							if (item.column_id !== 14 && item.imageUrl) while (item.imgurl.length < 3) item.imgurl.push('/static/no_pic.png')
 							return item
-						})
+						}).filter(item => +item.column_id !== 13)
+						this.shopList = res.data.filter(item => +item.column_id === 13)
 						resolve()
 					})
 				})
@@ -430,6 +444,37 @@
 		background-color: white;
 		box-shadow: 0px 0 40rpx 0px #dedede;
 		z-index: 999;
+	}
+	.shop {
+		padding: 20rpx 20rpx 0;
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		.item {
+			flex-basis: 50%;
+			box-sizing: border-box;
+			margin-bottom: 15rpx;
+			&:nth-of-type(2n+1) {
+				padding-right: 15rpx;
+			}
+			& > .el {
+				height: 100%;
+				box-sizing: border-box;
+				padding: 15rpx;
+				color: white;
+				.font {
+					color: #FEC92C
+				}
+				.desc {
+					text-overflow: -o-ellipsis-lastline;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					display: -webkit-box;
+					-webkit-line-clamp: 2;
+					-webkit-box-orient: vertical;
+				}
+			}
+		}		
 	}
 	.box {
 		overflow: hidden;

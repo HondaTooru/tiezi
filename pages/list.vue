@@ -94,9 +94,9 @@
 			</block>
 			<block v-if="column_id === 13">
 				<navigator hover-class="none" :url="'/pages/productlist?id='+item.id+'&phone='+item.phone" class="item" v-for="(item, i) in list" :key="i">
-					<view class="el radius bg-red">
+					<view class="el radius bg-red flex flex-direction justify-around">
 						<view class="title text-xl text-bold text-center">{{ item.title }}</view>
-						<view class="desc text-sm font text-center padding-tb-sm">{{ item.describe }}</view>
+						<view class="desc text-sm font text-center margin-tb-sm">{{ item.describe }}</view>
 						<view class="text-black flex justify-between">
 							<view class="margin-top-xs text-xs text-cut"><text class="cuIcon-location padding-right-xs"></text>{{ item.region }}</view>
 							<view class="margin-top-xs text-xs" @tap.stop="makeCall(item.phone)"><text class="cuIcon-phone padding-right-xs"></text>{{ item.phone }}</view>
@@ -403,7 +403,6 @@ export default {
 	async onPullDownRefresh () {
 		uni.showLoading({ title: '请稍后' })
 		this.query.page = 1
-		console.log(this.category_id)
 		await this.loadDetails()
 		uni.hideLoading()
 		uni.stopPullDownRefresh()
@@ -489,7 +488,6 @@ export default {
 			}
 		},		
 		tapAction (item, index) {
-			console.log(item)
 			item.show = !item.show
 		},		
 		async moreAction(type, item) {
@@ -513,7 +511,7 @@ export default {
 		},
 		change(e) {
 			const index = e.currentTarget.dataset.index
-			this.category_id = this.type[index].id
+			this.category_id = +this.type[index].id === -1 ? '' : this.type[index].id
 			this.query.page = 1
 			uni.showLoading({ mask: true, title: '加载中' })
 			this.getList(this.category_id).then(res => {
@@ -534,7 +532,14 @@ export default {
 		getCate () {
 			return new Promise(resolve => {
 				placardCate({ column_id: this.column_id }).then(res => {
-					this.type = res.data.cate_name
+					const cate = [
+						{ id: '-1', cate_name: '所有分类' }
+					]
+					const shop_cate = [
+						{ id: '-2', cate_name: '开店' }
+					]
+					const c_cate = +this.column_id === 13 ? cate.concat(shop_cate) : cate
+					this.type = res.data.cate_name.concat(c_cate)
 					uni.setStorageSync('cate', res.data.cate_name)
 					if(!this.category_id) this.category_id = this.type.length ? this.type[0].id : this.column_id
 					this.swiper = res.data.roll
@@ -653,6 +658,14 @@ export default {
 					.font {
 						color: #FEC92C
 					}
+					.desc {
+						text-overflow: -o-ellipsis-lastline;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						display: -webkit-box;
+						-webkit-line-clamp: 2;
+						-webkit-box-orient: vertical;
+					}					
 				}
 			}			
 		}

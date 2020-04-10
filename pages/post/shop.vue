@@ -5,7 +5,7 @@
 			<view class="title">类型</view>
 			<picker @change="PickerChange" :value="index" :range="type" range-key="cate_name">
 				<view class="picker">
-					{{type[index].cate_name}}
+					{{index === -1 ? '请选择' : type[index].cate_name}}
 				</view>
 			</picker>				
 		</view>
@@ -43,7 +43,7 @@
 		data () {
 			return {
 				type:[],
-				index: 0,
+				index: -1,
 				region: uni.getStorageSync('region'),
 				params: {
 					region: '',
@@ -60,10 +60,8 @@
 			const details = uni.getStorageSync('details')
 			const type = uni.getStorageSync('cate')
 			this.type = type			
-		
 			this.params.column_id = uni.getStorageSync('nav').id
 			this.params.region = uni.getStorageSync('region')
-			this.params.category_id = this.type.length ? type[0].id : this.params.column_id
 			if (details.id !== void 0) {
 				this.params.id = details.id
 				this.params.title = details.title
@@ -89,7 +87,11 @@
 				const formData = e.detail.value
 				const checkRes = graceChecker.check(formData, rule)
 				if (checkRes) {
-					this.postContent({...this.params})
+					if (this.params.category_id !== '') {
+						this.postContent({...this.params})
+					} else {
+						uni.showToast({ title: '请选择分类', icon: 'none' })
+					}
 				} else {
 					uni.showToast({ title: graceChecker.error, icon: "none" })
 				}

@@ -24,7 +24,7 @@
 				<view class="title">类型</view>
 				<picker @change="PickerChange" :value="index" :range="type" range-key="cate_name">
 					<view class="picker">
-						{{type[index].cate_name}}
+						{{index === -1 ? '请选择' : type[index].cate_name}}
 					</view>
 				</picker>				
 			</view>
@@ -52,7 +52,7 @@
 			return {
 				imgList: [],
 				type: [],
-				index: 0,
+				index: -1,
 				currentTab: 0,
 				region: uni.getStorageSync('region'),
 				params: {
@@ -70,7 +70,6 @@
 			this.type = type
 			this.params.column_id = uni.getStorageSync('nav').id
 			this.params.region = uni.getStorageSync('region')
-			this.params.category_id = this.type.length ? type[0].id : this.params.column_id
 			if (details.id !== void 0) {
 				this.params.id = details.id
 				this.params.title = details.title
@@ -91,7 +90,11 @@
 				if (checkRes) {
 					this.params.imgurl = this.imgList.join(',')
 					if (this.imgList.length >= 3) {
-						this.postContent(this.params)
+						if (this.params.category_id !== '') {
+							this.postContent(this.params)
+						} else {
+							uni.showToast({ title: '请选择分类', icon: 'none' })
+						}
 					} else {
 						uni.showModal({
 							content: '请上传至少3张图片',
