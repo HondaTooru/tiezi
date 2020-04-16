@@ -7,8 +7,8 @@
 				<view class="flex-sub text-cut text-white">{{ u.title }}</view>
 			</view>
 			<view class="flex margin-top-sm align-center">
-				<view class="margin-right-sm text-gray text-xs">{{ u.diff }}</view>
-				<view class=" text-xs text-gray">来自{{ u.region }}</view>
+				<view class="margin-right-sm text-gray text-sm">{{ u.diff }}</view>
+				<view class=" text-sm text-gray">来自{{ u.region }}</view>
 			</view>
 		</view>
 	</view>

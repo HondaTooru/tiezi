@@ -24,7 +24,7 @@
 	</view>		
 	<comTop @on-change="cityChange">
 		<view class="type" slot="head">
-			<view class="item" v-for="(item ,index) in type" :key="index"><view @tap="change" :data-index="index" :class="['atx', { active: currentTab === index }, { dx: column_id === 16 && item.id === '39' }]">{{ item.cate_name }}</view></view>
+			<view class="item" v-for="(item ,index) in type" :key="index"><view @tap="change" :data-index="index" :data-id="item.id" :class="['atx', { active: currentTab === index }, { dx: column_id === 16 && item.id === '39' }]">{{ item.cate_name }}</view></view>
 		</view>		
 	</comTop>
 	<view class="box">
@@ -70,7 +70,7 @@
 					<view class="flex justify-end margin-tb-xs">
 						<view class="margin-tb-xs flex align-center">
 							<text class="cuIcon-time padding-right-xs"></text>
-							<text class="text-xs">{{ item.top_starttime }}</text>
+							<text class="text-sm">{{ item.start_time }}</text>
 						</view>
 					</view>
 					<view class="flex justify-between align-center">
@@ -98,8 +98,8 @@
 						<view class="title text-xl text-bold text-center">{{ item.title }}</view>
 						<view class="desc text-sm font text-center margin-tb-sm">{{ item.describe }}</view>
 						<view class="text-black flex justify-between">
-							<view class="margin-top-xs text-xs text-cut"><text class="cuIcon-location padding-right-xs"></text>{{ item.region }}</view>
-							<view class="margin-top-xs text-xs" @tap.stop="makeCall(item.phone)"><text class="cuIcon-phone padding-right-xs"></text>{{ item.phone }}</view>
+							<view class="margin-top-xs text-sm text-cut"><text class="cuIcon-location padding-right-xs"></text>{{ item.region }}</view>
+							<view class="margin-top-xs text-sm" @tap.stop="makeCall(item.phone)"><text class="cuIcon-phone padding-right-xs"></text>{{ item.phone }}</view>
 						</view>								
 					</view>
 				</navigator>				
@@ -396,14 +396,14 @@ export default {
 			list: [],
 			type: [],
 			swiper: [],
-			currentTab: 0,
+			currentTab: '',
 			category_id: ''
 		}
 	},		
 	async onPullDownRefresh () {
 		uni.showLoading({ title: '请稍后' })
 		this.query.page = 1
-		await this.loadDetails()
+		await this.loadDetails(false)
 		uni.hideLoading()
 		uni.stopPullDownRefresh()
 	},	
@@ -510,26 +510,34 @@ export default {
 			})
 		},
 		change(e) {
-			const index = e.currentTarget.dataset.index
-			this.category_id = +this.type[index].id === -1 ? '' : this.type[index].id
-			this.query.page = 1
-			uni.showLoading({ mask: true, title: '加载中' })
-			this.getList(this.category_id).then(res => {
-				uni.hideLoading()
-				this.currentTab = index
-			})
+			const id = +e.currentTarget.dataset.id
+			console.log(id, this.column_id)
+			if (id === -2 && this.column_id === 13) {
+				uni.navigateTo({
+					url: '/pages/post/shop'
+				})
+			} else {
+				const index = e.currentTarget.dataset.index
+				this.category_id = +this.type[index].id === -1 ? '' : this.type[index].id
+				this.query.page = 1
+				uni.showLoading({ mask: true, title: '加载中' })
+				this.getList(this.category_id).then(res => {
+					uni.hideLoading()
+					this.currentTab = index
+				})
+			}
 		},
 		cityChange (e) {
 			this.query.page = 1
 			this.getList(this.category_id)
 		},
-		async loadDetails () {
+		async loadDetails (flag = true) {
 			uni.showLoading({ title: '加载中' })
-			await this.getCate()
+			await this.getCate(flag)
 			await this.getList(this.category_id)
 			uni.hideLoading()
 		},
-		getCate () {
+		getCate (flag = true) {
 			return new Promise(resolve => {
 				placardCate({ column_id: this.column_id }).then(res => {
 					const cate = [
@@ -540,8 +548,8 @@ export default {
 					]
 					const c_cate = +this.column_id === 13 ? cate.concat(shop_cate) : cate
 					this.type = res.data.cate_name.concat(c_cate)
+					if (flag) this.currentTab = +this.column_id === 13 ? this.type.length - 2 : this.type.length - 1
 					uni.setStorageSync('cate', res.data.cate_name)
-					if(!this.category_id) this.category_id = this.type.length ? this.type[0].id : this.column_id
 					this.swiper = res.data.roll
 					resolve()
 				})

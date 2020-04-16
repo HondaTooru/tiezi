@@ -51,7 +51,7 @@
 				<userAuth></userAuth>
 			</view>
 		</form>
-		<AuthModal/>
+		<AuthModal @submit="post"/>
 	</view>
 </template>
 
@@ -101,7 +101,11 @@
 			...mapGetters(['showModal'])
 		},
 		methods: {
-			...mapActions(['postContent']),			
+			...mapActions(['postContent']),
+			post () {
+				console.log(111)
+				this.postContent({...this.params, start_time: this.start_time})
+			},			
 			submit (e) {
 				const rule = [
 					{name:"address_start", checkType : "notnull", errorMsg:"请输入出发地址"},
@@ -123,8 +127,7 @@
 			},					
 			PickerChange (e) {
 				this.index = +e.detail.value
-				console.log(this.type, this.index)
-				this.params.category_id = this.picker[this.index].id
+				if (this.index !== -1) this.params.category_id = this.picker[this.index].id
 			},
 			TimeChange(e) {
 				this.time = e.detail.value

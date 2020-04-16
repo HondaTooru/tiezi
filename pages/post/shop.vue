@@ -1,6 +1,6 @@
 <template>
 	<form @submit="submit">
-		<AuthModal/>
+		<AuthModal @submit="post"/>
 		<view class="cu-form-group">
 			<view class="title">类型</view>
 			<picker @change="PickerChange" :value="index" :range="type" range-key="cate_name">
@@ -77,6 +77,9 @@
 		},
 		methods: {
 			...mapActions(['postContent']),
+			post () {
+				this.postContent({...this.params})
+			},
 			submit (e) {
 				const rule = [
 					{name:"title", checkType : "notnull", errorMsg:"请输入店铺名称"},
@@ -97,8 +100,8 @@
 				}
 			},				
 			PickerChange (e) {
-				this.index = e.detail.value
-				this.params.category_id = this.type[this.index].id
+				this.index = +e.detail.value
+				if (this.index !== -1) this.params.category_id = this.type[this.index].id
 			}			
 		}
 	}

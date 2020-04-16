@@ -1,7 +1,7 @@
 <template>
 	<view class="post-help">
 		<com-share></com-share>
-		<AuthModal/>
+		<AuthModal @submit="post"/>
 		<form @submit="submit">		
 			<view class="cu-form-group" v-if="type.length">
 				<view class="title">类型</view>
@@ -69,6 +69,9 @@
 		},
 		methods: {
 			...mapActions(['postContent']),
+			post () {
+				this.postContent(this.params)
+			},
 			submit (e) {
 				const rule = [
 					{name:"title", checkType : "notnull", errorMsg:"请输入标题"},
@@ -91,8 +94,8 @@
 				this.currentTab = index
 			},
 			PickerChange (e) {
-				this.index = e.detail.value
-				this.params.category_id = this.type[this.index].id
+				this.index = +e.detail.value
+				if (this.index !== -1) this.params.category_id = this.type[this.index].id
 			}										
 		}
 	}

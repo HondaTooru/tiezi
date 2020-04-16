@@ -1,7 +1,7 @@
 <template>
 <view class="shop-post">
 	<com-share></com-share>
-	<AuthModal/>
+	<AuthModal @submit="post"/>
 	<form>
 		<view class="cu-bar bg-white margin-top-xs">
 			<view class="action">图片上传</view>
@@ -66,6 +66,9 @@
 		},
 		methods: {
 			...mapActions(['postContent']),
+			post () {
+				this.postContent({...this.params, start_time: this.start_time})
+			},
 			submit (e) {
 				const rule = [
 					{name:"address_start", checkType : "notnull", errorMsg:"请输入出发地址"},
@@ -76,16 +79,14 @@
 				const formData = e.detail.value
 				const checkRes = graceChecker.check(formData, rule)
 				if (checkRes) {
-					this.postContent({...this.params, start_time: this.start_time}).then(res => {
-						console.log(res)
-					})
+					this.postContent({...this.params, start_time: this.start_time})
 				} else {
 					uni.showToast({ title: graceChecker.error, icon: "none" })
 				}
 			},				
 			typeChange (e) {
-				this.t_value = e.detail.value
-				this.params.category_id = this.type[this.t_value].id
+				this.t_value = +e.detail.value
+				if (this.t_value !== -1) this.params.category_id = this.type[this.t_value].id
 			},
 			ChooseImage() {
 				uni.chooseImage({

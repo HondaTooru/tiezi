@@ -16,13 +16,13 @@
 						<view class="title text-xl text-bold text-center">{{ item.title }}</view>
 						<view class="desc text-sm font text-center margin-tb-sm">{{ item.describe }}</view>
 						<view class="text-black flex justify-between">
-							<view class="margin-top-xs text-xs text-cut"><text class="cuIcon-location padding-right-xs"></text>{{ item.region }}</view>
-							<view class="margin-top-xs text-xs" @tap.stop="makeCall(item.phone)"><text class="cuIcon-phone padding-right-xs"></text>{{ item.phone }}</view>
+							<view class="margin-top-xs text-sm text-cut"><text class="cuIcon-location padding-right-xs"></text>{{ item.region }}</view>
+							<view class="margin-top-xs text-sm" @tap.stop="makeCall(item.phone)"><text class="cuIcon-phone padding-right-xs"></text>{{ item.phone }}</view>
 						</view>								
 					</view>
 				</navigator>
 			</view>
-			<view class="list margin-top-sm padding-bottom-xs margin-bottom-sm">
+			<view class="list padding-bottom-xs margin-bottom-sm">
 				<view class="item solid-bottom" v-for="(item, index) in x" :key="index" v-if="item.column_id !== 14">
 					<block v-if="item.imgurl">
 						<swiper previous-margin="20rpx" :indicator-dots="false" :autoplay="true" :display-multiple-items="3" :interval="4000" :duration="1500">
@@ -46,12 +46,12 @@
 							<view class="padding-xs text-df">{{ item.content || item.describe }}</view>
 						</view>
 						<view class="flex justify-between margin-top-xs text-gray padding-bottom-xs">
-							<view class="flex align-center"><text class="cuIcon-location padding-right-xs"></text><text class="text-xs">{{ item.region }}</text></view>
+							<view class="flex align-center"><text class="cuIcon-location padding-right-xs"></text><text class="text-sm">{{ item.region }}</text></view>
 							<view class="flex align-center" v-if="item.phone"><text class="cuIcon-phone padding-right-xs"></text><text class="text-df" @tap="makeCallPhone(item.phone)">{{ item.phone }}</text></view>
 						</view>
 					</view>
 				</view>
-				<view class="item margin-tb-sm padding-sm bg-white solid-bottom" v-else @tap="toDetail" :data-item="item">
+				<view class="item padding-xs bg-white solid-bottom" v-else @tap="toDetail" :data-item="item">
 					<view class="flex justify-between">
 						<view class="cu-tag bg-grey" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.cate_name }}</view>
 						<view class="cu-steps steps-arrow">
@@ -63,10 +63,10 @@
 							</view>							
 						</view>
 					</view>
-					<view class="flex justify-end margin-tb-xs">
+					<view class="flex justify-end margin-tb-sm">
 						<view class="margin-tb-xs flex align-center">
 							<text class="cuIcon-time padding-right-xs"></text>
-							<text class="text-xs">{{ item.top_starttime }}</text>
+							<text class="text-sm">{{ item.start_time }}</text>
 						</view>
 					</view>
 					<view class="flex justify-between align-center">

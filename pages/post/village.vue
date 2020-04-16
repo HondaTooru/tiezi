@@ -1,7 +1,7 @@
 <template>
 	<view class="post-village">
 		<com-share></com-share>
-		<AuthModal/>
+		<AuthModal @submit="post"/>
 		<form @submit="submit">
 			<view class="cu-bar bg-white margin-top-xs">
 				<view class="action">图片上传</view>
@@ -133,6 +133,9 @@
 			deleteTag (idx) {
 				this.tags.splice(idx, 1)
 			},
+			post () {
+				this.postContent(this.params)
+			},
 			submit (e) {
 				const rule = [
 					{name:"title", checkType : "notnull", errorMsg:"请输入标题"},
@@ -205,8 +208,8 @@
 				})
 			},
 			PickerChange (e) {
-				this.index = e.detail.value
-				this.params.category_id = this.type[this.index].id
+				this.index = +e.detail.value
+				if (this.index !== -1) this.params.category_id = this.type[this.index].id
 			}										
 		}
 	}

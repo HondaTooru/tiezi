@@ -10,7 +10,7 @@
 					<view>
 						<view class="cu-tag bg-white">钱包: {{ userInfo.now_money }}</view>
 						<view class="cu-tag bg-red">积分: {{ userInfo.integral }}</view>
-						<view class="cu-tag bg-orange" v-if="userInfo.vip">VIP</view>						
+						<view class="cu-tag bg-orange" v-if="userInfo.vip">VIP</view>
 					</view>
 					<view>
 						<view class="margin-top-xs" v-if="address.city"><text class="cuIcon-location padding-right-xs"></text>{{ address.city }}</view>
@@ -44,6 +44,7 @@
 					<EmptyData v-else :src="src">{{ act ? '你还没有收藏的帖子' : '你还没有发表帖子' }}</EmptyData>
 				</view>
 			</view>
+			<navigator hover-class="none" url="/pages/post/shop" class="flex flex-direction padding-lr-sm bg-white"><view class="cu-btn bg-red margin-tb-sm lg">开店</view></navigator>
 			<block v-for="(item, index) in userShop" :key="index">
 				<view class="margin-top-sm bg-sea padding-sm shop-name">
 					<view class="shop text-center text-df">{{ item.title }}</view>

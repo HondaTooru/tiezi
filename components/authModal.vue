@@ -29,7 +29,7 @@
 			}
 		},
 		computed: {
-			...mapGetters(['showModal', 'rule'])
+			...mapGetters(['showModal', 'rule', 'isRead'])
 		},
 		methods: {
 			change () {
@@ -42,6 +42,7 @@
 			},
 			confirmRead () {
 				this.$store.commit('SET_SHOWMODAL', false)
+				if (this.isRead) this.$emit('submit')
 			}
 		}
 	}

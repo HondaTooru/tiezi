@@ -5,6 +5,7 @@ const getters = {
 	tiez: state => state.user.tiez,
 	ship: state => state.user.shop,
 	Tap: state => state.user.Tap,
+	isRead: state => state.user.isRead,
 	contact: state => state.user.contact,
 	collect: state => state.user.collect,
 	cityList: state => state.app.cityList,

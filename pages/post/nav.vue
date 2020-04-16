@@ -1,7 +1,7 @@
 <template>
 	<view class="nav-post">
 		<com-share></com-share>
-		<AuthModal/>
+		<AuthModal @submit="post"/>
 		<form @submit="submit">
 			<view class="cu-bar bg-white margin-top-xs">
 				<view class="action">图片上传</view>
@@ -208,6 +208,9 @@
 		},
 		methods: {
 			...mapActions(['uploadImage', 'postContent']),
+			post () {
+				this.postContent(this.params)
+			},
 			submit (e) {
 				const rule = [
 					{name:"title", checkType : "notnull", errorMsg:"请输入标题"},
@@ -283,8 +286,8 @@
 				this.c_value = e.detail.value
 			},
 			PickerChange(e) {
-				this.index = e.detail.value
-				this.params.category_id = this.type[this.index].id
+				this.index = +e.detail.value
+				if (this.index !== -1) this.params.category_id = this.type[this.index].id
 			},
 			sexChange (e) {
 				this.s_value = e.detail.value
