@@ -44,15 +44,22 @@
 				this.column_id = e
 			},
 			async toPost () {
-				uni.showLoading({ mask: true, title: '请稍后' })
-				await this.getCate()
-				uni.hideLoading()
-				uni.navigateTo({
-					url: this.url,
-					success: () => {
-						uni.setStorageSync('details', {})
-					}
-				})
+				if (this.column_id !== void 0) {
+					uni.showLoading({ mask: true, title: '请稍后' })
+					await this.getCate()
+					uni.hideLoading()
+					uni.navigateTo({
+						url: this.url,
+						success: () => {
+							uni.setStorageSync('details', {})
+						}
+					})
+				}  else {
+					uni.showToast({
+						icon: 'none',
+						title: '请选择发布栏目'
+					})
+				}
 			},
 			getCate () {
 				return new Promise(resolve => {

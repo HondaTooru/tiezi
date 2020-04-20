@@ -9,7 +9,7 @@
 		</swiper>
 		<view v-else class="list">
 			<view class="item" v-for="(item, index) in navList" :key="index" @tap="change" :data-index="index" :data-id="item.id" :data-name="item.cate_name">
-				<view :class="['atx',{ active: act ? act : cuurent === index }]">{{ item.cate_name }}</view>
+				<view :class="['atx',{ active: act ? act : current === index }]">{{ item.cate_name }}</view>
 			</view>
 		</view>
 	</view>
@@ -20,7 +20,7 @@
 	export default {
 		data () {
 			return {
-				cuurent: 0
+				current: -1
 			}
 		},
 		props: {
@@ -31,13 +31,6 @@
 			type: {
 				type: Boolean,
 				default: false
-			}
-		},
-		created () {
-			if (!this.act) {
-				const name = this.navList[this.cuurent].cate_name
-				const id = +this.navList[this.cuurent].id
-				uni.setStorageSync('nav', { name, id })				
 			}
 		},
 		methods: {
@@ -51,7 +44,8 @@
 						url: `/pages/list?name=${name}&id=${id}`
 					})
 				} else {
-					this.cuurent = index
+					this.current = index
+					console.log(index)
 					this.$emit('change', id)
 				}
 			} 
