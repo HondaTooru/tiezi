@@ -713,6 +713,7 @@ button.cuIcon.lg {
 	left: 4upx;
 	filter: blur(6upx);
 	opacity: 0.6;
+	opacity: 0.6;
 }
 
 .cu-btn.button-hover {
@@ -737,7 +738,7 @@ button.cuIcon.lg {
  ==================== */
 
 .cu-tag {
-	font-size: 24upx;
+	font-size: 36upx;
 	vertical-align: middle;
 	position: relative;
 	display: inline-flex;
@@ -745,7 +746,7 @@ button.cuIcon.lg {
 	justify-content: center;
 	box-sizing: border-box;
 	padding: 0upx 16upx;
-	height: 48upx;
+	height: 60upx;
 	font-family: Helvetica Neue, Helvetica, sans-serif;
 	white-space: nowrap;
 }
@@ -3753,11 +3754,14 @@ scroll-view.cu-steps .cu-item {
 }
 
 .text-sm {
-	font-size: 24upx;
+	font-size: 26upx;
 }
 
+.text-sm-title {
+	font-size: 32upx;
+}
 .text-df {
-	font-size: 28upx;
+	font-size: 36upx;
 }
 
 .text-lg {
@@ -3800,7 +3804,7 @@ scroll-view.cu-steps .cu-item {
 
 .text-cut {
 	text-overflow: ellipsis;
-	white-space: nowrap;
+	/* white-space: nowrap; */
 	overflow: hidden;
 }
 

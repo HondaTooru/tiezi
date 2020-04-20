@@ -38,7 +38,7 @@
 			margin: 8rpx;
 		    text-align: center;
 			padding: 15rpx 0;
-			font-size: 26rpx;
+			font-size: 36rpx;
 			box-sizing: border-box;
 			border: 1px solid black;
 			background-color: white;

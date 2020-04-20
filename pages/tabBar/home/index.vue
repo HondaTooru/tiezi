@@ -39,7 +39,7 @@
 							<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
 							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
 						</view>
-						<view class="flex align-center justify-between"><view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.cate_name }}</view><view class="flex-sub text-cut" @tap="toDetail" :data-item="item" @longpress.stop="LongPress(index)">{{ item.title }}</view>
+						<view class="flex align-center justify-between"><view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.cate_name }}</view><view class="flex-sub text-cut text-sm-title" @tap="toDetail" :data-item="item" @longpress.stop="LongPress(index)">{{ item.title }}</view>
 						<view class="more" @tap.stop="tapAction(item, index)"></view>
 						</view>
 						<view v-if="!item.imgurl">
@@ -66,7 +66,7 @@
 					<view class="flex justify-end margin-tb-sm">
 						<view class="margin-tb-xs flex align-center">
 							<text class="cuIcon-time padding-right-xs"></text>
-							<text class="text-sm">{{ item.start_time }}</text>
+							<text class="text-sm text-sm-title">{{ item.start_time }}</text>
 						</view>
 					</view>
 					<view class="flex justify-between align-center">

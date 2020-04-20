@@ -98,7 +98,7 @@
 						<view class="title text-xl text-bold text-center">{{ item.title }}</view>
 						<view class="desc text-sm font text-center margin-tb-sm">{{ item.describe }}</view>
 						<view class="text-black flex justify-between">
-							<view class="margin-top-xs text-sm text-cut"><text class="cuIcon-location padding-right-xs"></text>{{ item.region }}</view>
+							<view class="margin-top-xs text-sm text-cut text-sm-title"><text class="cuIcon-location padding-right-xs"></text>{{ item.region }}</view>
 							<view class="margin-top-xs text-sm" @tap.stop="makeCall(item.phone)"><text class="cuIcon-phone padding-right-xs"></text>{{ item.phone }}</view>
 						</view>								
 					</view>
@@ -150,7 +150,7 @@
 							<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
 							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
 						</view>							
-						<view class="flex"><view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.column }}</view><view class="text-cut">{{ item.title }}</view></view>
+						<view class="flex"><view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.column }}</view><view class="text-cut text-sm-title">{{ item.title }}</view></view>
 						<view class="more margin-left-xs" @tap.stop="tapAction(item, index)"></view>
 					</view>
 				</navigator>				
@@ -158,7 +158,7 @@
 			<block v-if="column_id === 9">
 				<navigator hover-class="none" :url="'/pages/detail?placard_id='+item.id+'&column_id='+item.column_id" class="flex align-center padding-tb-xs" v-for="(item, i) in list" :key="i">
 					<view class="cu-tag" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.category }}</view>
-					<view class="flex-sub text-cut padding-lr-xs">{{ item.title }}</view>
+					<view class="flex-sub text-cut padding-lr-xs text-sm-title">{{ item.title }}</view>
 					<button class="cu-btn cuIcon" @tap.stop="makeCall(item.phone)">
 						<text class="cuIcon-phone"></text>
 					</button>
@@ -184,7 +184,7 @@
 					</swiper>
 					<view class="flex align-center padding-tb-xs btm">
 						<view class="cu-tag" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.category }}</view>
-						<view class="flex-sub text-cut padding-lr-xs">{{ item.title }}</view>
+						<view class="flex-sub text-cut padding-lr-xs text-sm-title">{{ item.title }}</view>
 						<button class="cu-btn cuIcon" @tap.stop="makeCall(item.phone)">
 							<text class="cuIcon-phone"></text>
 						</button>
@@ -203,7 +203,7 @@
 				<navigator hover-class="none" class="padding-bottom-xs" :url="'/pages/detail?placard_id='+item.id+'&column_id='+item.column_id" v-for="(item, i) in list" :key="i" :class="{ 'solid-bottom': i !== list.length - 1 }">
 					<view class="flex align-center padding-tb-xs btm">
 						<view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.category }}</view>
-						<view class="text-cut flex-sub">{{ item.title }}</view>
+						<view class="text-cut flex-sub text-sm-title">{{ item.title }}</view>
 						<view class="flex justify-between margin-top-xs">
 							<button class="cu-btn cuIcon sm" @tap.stop="makeCall(item.phone)">
 								<text class="cuIcon-phone"></text>
@@ -224,7 +224,7 @@
 				<navigator hover-class="none" :url="'/pages/detail?placard_id='+item.id+'&column_id='+item.column_id" v-for="(item, i) in list" :key="i" class="padding-tb-sm" :class="{ 'solid-bottom': i !== list.length - 1 }">
 					<view class="flex align-center btm">
 						<view class="cu-tag" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.category }}</view>
-						<view class="flex-sub text-cut padding-lr-xs">{{ item.title }}</view>
+						<view class="flex-sub text-cut padding-lr-xs text-sm-title" >{{ item.title }}</view>
 <!-- 						<button class="cu-btn cuIcon" @tap.stop="makeCall(item.phone)">
 							<text class="cuIcon-phone"></text>
 						</button> -->
@@ -248,7 +248,7 @@
 					</swiper>
 					<view class="flex align-center margin-tb-xs">
 						<view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.category }}</view>
-						<view class="text-cut">{{ item.title }}</view>
+						<view class="text-cut text-sm-title">{{ item.title }}</view>
 					</view>
 					<view class="flex btm margin-bottom-xs align-center justify-between">
 						<view class="flex">
@@ -277,7 +277,7 @@
 						<view class="flex align-center justify-between btm">
 							<view class="flex flex-sub">
 								<view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.category }}</view>
-								<view class="text-cut">{{ item.title }}</view>
+								<view class="text-cut text-sm-title">{{ item.title }}</view>
 							</view>
 							<view class="tool" v-if="item.show">
 								<userAuth @tap.stop=""></userAuth>
@@ -706,7 +706,7 @@ export default {
 				margin: 8rpx;
 				text-align: center;
 				padding: 15rpx 0;
-				font-size: 28rpx;
+				font-size: 36rpx;
 				box-sizing: border-box;
 				border: 2rpx solid #5b8bc1;
 				white-space: nowrap;
