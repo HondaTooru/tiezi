@@ -49,7 +49,7 @@
 							<view class="el" @tap.stop="moreAction(0, item)"><text class="cuIcon-likefill padding-right-xs"></text><text class="text-sm">收藏</text></view>
 							<view class="el" @tap.stop="moreAction(1, item)"><text class="cuIcon-appreciatefill padding-right-xs"></text><text class="text-sm">点赞</text></view>
 							<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
-							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
+							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share" :data-item="item">转发</button></view>
 						</view>
 					</view>
 				</navigator>
@@ -81,7 +81,7 @@
 								<view class="el" @tap.stop="moreAction(0, item)"><text class="cuIcon-likefill padding-right-xs"></text><text class="text-sm">收藏</text></view>
 								<view class="el" @tap.stop="moreAction(1, item)"><text class="cuIcon-appreciatefill padding-right-xs"></text><text class="text-sm">点赞</text></view>
 								<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
-								<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
+								<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share" :data-item="item">转发</button></view>
 							</view>							
 							<view class="cu-tag bg-grey"><text class="cuIcon-phone"></text></view>
 							<view class="flex">
@@ -123,7 +123,7 @@
 							<view class="el" @tap.stop="moreAction(0, item)"><text class="cuIcon-likefill padding-right-xs"></text><text class="text-sm">收藏</text></view>
 							<view class="el" @tap.stop="moreAction(1, item)"><text class="cuIcon-appreciatefill padding-right-xs"></text><text class="text-sm">点赞</text></view>
 							<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
-							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
+							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share" :data-item="item">转发</button></view>
 						</view>							
 						<view class="flex justify-between">
 							<view class="flex justify-between">
@@ -148,7 +148,7 @@
 							<view class="el" @tap.stop="moreAction(0, item)"><text class="cuIcon-likefill padding-right-xs"></text><text class="text-sm">收藏</text></view>
 							<view class="el" @tap.stop="moreAction(1, item)"><text class="cuIcon-appreciatefill padding-right-xs"></text><text class="text-sm">点赞</text></view>
 							<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
-							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
+							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share" :data-item="item">转发</button></view>
 						</view>							
 						<view class="flex"><view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.column }}</view><view class="text-cut text-sm-title">{{ item.title }}</view></view>
 						<view class="more margin-left-xs" @tap.stop="tapAction(item, index)"></view>
@@ -168,7 +168,7 @@
 						<view class="el" @tap.stop="moreAction(0, item)"><text class="cuIcon-likefill padding-right-xs"></text><text class="text-sm">收藏</text></view>
 						<view class="el" @tap.stop="moreAction(1, item)"><text class="cuIcon-appreciatefill padding-right-xs"></text><text class="text-sm">点赞</text></view>
 						<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
-						<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
+						<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share" :data-item="item">转发</button></view>
 					</view>	
 					<view class="more margin-left-xs" @tap.stop="tapAction(item, index)"></view>
 				</view>					
@@ -193,7 +193,7 @@
 							<view class="el" @tap.stop="moreAction(0, item)"><text class="cuIcon-likefill padding-right-xs"></text><text class="text-sm">收藏</text></view>
 							<view class="el" @tap.stop="moreAction(1, item)"><text class="cuIcon-appreciatefill padding-right-xs"></text><text class="text-sm">点赞</text></view>
 							<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
-							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
+							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share" :data-item="item">转发</button></view>
 						</view>	
 						<view class="more margin-left-xs" @tap.stop="tapAction(item, index)"></view>									
 					</view>
@@ -214,7 +214,7 @@
 							<view class="el" @tap.stop="moreAction(0, item)"><text class="cuIcon-likefill padding-right-xs"></text><text class="text-sm">收藏</text></view>
 							<view class="el" @tap.stop="moreAction(1, item)"><text class="cuIcon-appreciatefill padding-right-xs"></text><text class="text-sm">点赞</text></view>
 							<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
-							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
+							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share" :data-item="item">转发</button></view>
 						</view>	
 						<view class="more margin-left-xs" @tap.stop="tapAction(item, index)"></view>
 					</view>
@@ -233,7 +233,7 @@
 							<view class="el" @tap.stop="moreAction(0, item)"><text class="cuIcon-likefill padding-right-xs"></text><text class="text-sm">收藏</text></view>
 							<view class="el" @tap.stop="moreAction(1, item)"><text class="cuIcon-appreciatefill padding-right-xs"></text><text class="text-sm">点赞</text></view>
 							<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
-							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
+							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share" :data-item="item">转发</button></view>
 						</view>	
 						<view class="more margin-left-xs" @tap.stop="tapAction(item, index)"></view>						
 					</view>
@@ -260,7 +260,7 @@
 							<view class="el" @tap.stop="moreAction(0, item)"><text class="cuIcon-likefill padding-right-xs"></text><text class="text-sm">收藏</text></view>
 							<view class="el" @tap.stop="moreAction(1, item)"><text class="cuIcon-appreciatefill padding-right-xs"></text><text class="text-sm">点赞</text></view>
 							<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
-							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
+							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share" :data-item="item">转发</button></view>
 						</view>	
 						<view class="more margin-left-xs" @tap.stop="tapAction(item, index)"></view>						
 					</view>				
@@ -284,7 +284,7 @@
 								<view class="el" @tap.stop="moreAction(0, item)"><text class="cuIcon-likefill padding-right-xs"></text><text class="text-sm">收藏</text></view>
 								<view class="el" @tap.stop="moreAction(1, item)"><text class="cuIcon-appreciatefill padding-right-xs"></text><text class="text-sm">点赞</text></view>
 								<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
-								<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
+								<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share" :data-item="item">转发</button></view>
 							</view>	
 							<view class="more margin-left-xs" @tap.stop="tapAction(item, index)"></view>
 						</view>
@@ -385,12 +385,13 @@ export default {
 				limit: 10,
 				page:1
 			},
+			pageTitle: '',
 			params: {
 				first_id: 0,
 				pid: -1,
 				content: '',
 				receive_uid: ''
-			},			
+			},
 			show: false,
 			cItem: {},
 			list: [],
@@ -399,7 +400,21 @@ export default {
 			currentTab: '',
 			category_id: ''
 		}
-	},		
+	},
+	onShareAppMessage (res) {
+		const type = res.from
+		if (type === 'button') {
+			const item = res.target.dataset.item
+			return {
+				title: item.title,
+				path: `pages/detail?placard_id=${item.id}&column_id=${item.column_id}`
+			}				
+		}
+		return {
+			title: this.pageTitle,
+			path: `pages/list?name=${this.name}&id=${this.column_id}`
+		}
+	},			
 	async onPullDownRefresh () {
 		uni.showLoading({ title: '请稍后' })
 		this.query.page = 1
@@ -426,6 +441,7 @@ export default {
 			return url
 		},
 		name () {
+			console.log(this.column_id === 13 ? '发布' : '发帖')
 			return this.column_id === 13 ? '发布' : '发帖'
 		}
 	},
@@ -441,10 +457,10 @@ export default {
 	},
 	onLoad () {
 		const option = uni.getStorageSync('nav')
-		const name = option.name
+		this.pageTitle = option.name
 		this.column_id = option.id
 		uni.setNavigationBarTitle({
-			title: name
+			title: this.pageTitle
 		})
 		this.loadDetails()
 		uni.$on('onBottom', () => {

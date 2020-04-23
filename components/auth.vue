@@ -1,6 +1,6 @@
 <template>
 <view>
-	<view class="auth" v-if="!isLogin">
+	<view class="auth" v-if="!isLogin" :style="{ position }">
 		<button class="cu-btn" hover-class="none" open-type="getUserInfo" @getuserinfo="getInfo"></button>
 	</view>	
 </view>	
@@ -9,6 +9,12 @@
 <script>
 	import { mapGetters, mapActions } from 'vuex'
 	export default {
+		props: {
+			act: {
+				type: Boolean,
+				default: false
+			}
+		},
 		methods: {
 			...mapActions(['wxAuth']),
 			getInfo (e) {
@@ -26,14 +32,16 @@
 			}
 		},
 		computed: {
-			...mapGetters(['userInfo', 'isLogin'])
+			...mapGetters(['userInfo', 'isLogin']),
+			position () {
+				return this.act ? 'absolute' : 'fixed'
+			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	.auth {
-		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100%;

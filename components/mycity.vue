@@ -2,7 +2,7 @@
 	<view class="solid-top bg-white">
 		<view class="city">
 			<view v-for="(k, idx) in cityList" :key="idx" class="item" @tap="change" :data-index="idx">
-				<view :class="['radio',{ act: Tap === idx }]">{{ k }}</view>
+				<view :class="['radio',{ act: index === idx }]">{{ k }}</view>
 			</view>
 		</view>
 	</view>
@@ -11,16 +11,31 @@
 <script>
 	import { mapGetters } from 'vuex'
 	export default {
+		props: {
+			act: {
+				type: Boolean,
+				default: false
+			}
+		},
 		computed: {
-			...mapGetters(['cityList', 'Tap'])
+			...mapGetters(['cityList', 'Tap', 'postTab']),
+			index () {
+				return this.act ? this.postTab : this.Tap
+			}
 		},
 		methods: {
 			change (e) {
 				const index = e.currentTarget.dataset.index
-				this.$store.commit('SET_TAP', index)
-				uni.setStorageSync('currentTab', index)
-				uni.setStorageSync('region', this.cityList[this.Tap])
-				this.$emit('change', this.cityList[index])
+				if (!this.act) {
+					this.$store.commit('SET_TAP', index)
+					uni.setStorageSync('currentTab', index)
+					uni.setStorageSync('region', this.cityList[this.Tap])
+					this.$emit('change', this.cityList[index])
+				} else {
+					this.$store.commit('SET_POSTTAP', index)
+					uni.setStorageSync('post_region', this.cityList[this.postTab])
+				}
+
 			}
 		}
 	}

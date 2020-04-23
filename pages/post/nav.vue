@@ -139,7 +139,6 @@
 				index: -1,
 				s_value: 0,
 				currentTab: 0,
-				region: uni.getStorageSync('region'),
 				params: {
 					title:'',
 					imgurl: '',
@@ -164,7 +163,7 @@
 				}
 			}
 		},
-		onLoad(options) {
+		onLoad(option) {
 			const getStorege = uni.getStorageSync('details')
 			let details = {}
 			if (getStorege && JSON.stringify(getStorege) !== '{}') {
@@ -175,7 +174,7 @@
 			}
 			const type = uni.getStorageSync('cate')
 			this.type = type.filter(item => +item.id !== 39)
-			this.params.region = uni.getStorageSync('region')
+			this.params.region = option.type === void 0 ? uni.getStorageSync('region') : uni.getStorageSync('post_region')
 			this.params.column_id = uni.getStorageSync('nav').id
 			if (details && JSON.stringify(details) !== '{}') {
 				if (details.id !== void 0) this.params.id = details.id

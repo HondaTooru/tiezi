@@ -37,7 +37,7 @@
 							<view class="el" @tap.stop="moreAction(0, item)"><text class="cuIcon-likefill padding-right-xs"></text><text class="text-sm">收藏</text></view>
 							<view class="el" @tap.stop="moreAction(1, item)"><text class="cuIcon-appreciatefill padding-right-xs"></text><text class="text-sm">点赞</text></view>
 							<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
-							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share">转发</button></view>
+							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share" :data-item="item">转发</button></view>
 						</view>
 						<view class="flex align-center justify-between"><view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.cate_name }}</view><view class="flex-sub text-cut text-sm-title" @tap="toDetail" :data-item="item" @longpress.stop="LongPress(index)">{{ item.title }}</view>
 						<view class="more" @tap.stop="tapAction(item, index)"></view>
@@ -107,8 +107,9 @@
 							<view style="height: 175rpx;color:#999" v-if="!show" class="padding-tb-sm">请输入评论内容</view>
 							<textarea fixed placeholder="请输入评论内容" v-model="params.content" v-else/>
 						</view>
-						<view class="cu-form-group">
+						<view class="cu-form-group" style="position: relative;">
 							<button class="cu-btn bg-red sm" @tap="Publish">发表</button>
+							<userAuth @tap.stop="" act />
 						</view>
 					</form>
 				</view>
@@ -198,7 +199,20 @@
 	]	
 	export default {
 		name: 'home',
-		onShareAppMessage (res) {},
+		onShareAppMessage (res) {
+			const type = res.from
+			if (type === 'button') {
+				const item = res.target.dataset.item
+				return {
+					title: item.title,
+					path: `pages/detail?placard_id=${item.id}&column_id=${item.column_id}`
+				}				
+			}
+			return {
+				title: '乡里情',
+				path: 'pages/tabBar/home/index'
+			}
+		},
 		async onPullDownRefresh () {
 			uni.showLoading({ title: '请稍后' })
 			await this.getIndex()

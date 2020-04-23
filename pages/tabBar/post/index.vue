@@ -14,7 +14,7 @@
 				<view>选择要展示的地区</view>
 			</view>
 		</view>		
-		<MyCity />
+		<MyCity act />
 		<view class="margin-top-xs bg-white padding-lr-sm padding-top-sm">
 			<button class="cu-btn bg-sea" @tap="toPost">下一步</button>
 		</view>
@@ -24,6 +24,7 @@
 <script>
 	import NavBar from '@/components/nav'
 	import MyCity from '@/components/mycity'
+	import { mapGetters } from 'vuex'
 	import { placardCate } from '@/api'
 	export default {
 		components: {
@@ -44,16 +45,23 @@
 				this.column_id = e
 			},
 			async toPost () {
-				if (this.column_id !== void 0) {
-					uni.showLoading({ mask: true, title: '请稍后' })
-					await this.getCate()
-					uni.hideLoading()
-					uni.navigateTo({
-						url: this.url,
-						success: () => {
-							uni.setStorageSync('details', {})
-						}
-					})
+				if (this.current !== -1) {
+					if (this.postTab !== -1) {
+						uni.showLoading({ mask: true, title: '请稍后' })
+						await this.getCate()
+						uni.hideLoading()
+						uni.navigateTo({
+							url: `${this.url}?type=0`,
+							success: () => {
+								uni.setStorageSync('details', {})
+							}
+						})
+					} else {
+						uni.showToast({
+							icon: 'none',
+							title: '请选择发布的地区'
+						})						
+					}
 				}  else {
 					uni.showToast({
 						icon: 'none',
@@ -71,6 +79,7 @@
 			}
 		},
 		computed: {
+			...mapGetters(['current', 'postTab']),
 			url () {
 				let url = '/pages/post/'
 				if (this.column_id === 16) url += 'nav'

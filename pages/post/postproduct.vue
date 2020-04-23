@@ -57,11 +57,11 @@
 				}
 			}
 		},
-		onLoad() {
+		onLoad(option) {
 			const type = uni.getStorageSync('cate')
 			this.type = type
 			this.params.column_id = uni.getStorageSync('nav').id
-			this.params.region = uni.getStorageSync('region')
+			this.params.region = option.type === void 0 ? uni.getStorageSync('region') : uni.getStorageSync('post_region')
 			this.params.category_id = type[0].id		
 		},
 		methods: {

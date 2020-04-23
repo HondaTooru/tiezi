@@ -18,11 +18,6 @@
 <script>
 	import { mapGetters } from 'vuex'
 	export default {
-		data () {
-			return {
-				current: -1
-			}
-		},
 		props: {
 			act: {
 				type: Boolean,
@@ -44,14 +39,13 @@
 						url: `/pages/list?name=${name}&id=${id}`
 					})
 				} else {
-					this.current = index
-					console.log(index)
+					this.$store.commit('SET_CURRENT', index)
 					this.$emit('change', id)
 				}
 			} 
 		},
 		computed: {
-			...mapGetters(['navList'])
+			...mapGetters(['navList', 'current'])
 		}
 	}
 </script>

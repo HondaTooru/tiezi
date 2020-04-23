@@ -79,7 +79,6 @@
 				index: -1,
 				currentTab: 0,
 				labelName: '',
-				region: uni.getStorageSync('region'),
 				params: {
 					category_id: '',
 					column_id: '',
@@ -93,12 +92,12 @@
 				}
 			}
 		},
-		onLoad(options) {
+		onLoad(option) {
 			const details = uni.getStorageSync('details')
 			const type = uni.getStorageSync('cate')
 			this.type = type
 			this.params.column_id = uni.getStorageSync('nav').id
-			this.params.region = uni.getStorageSync('region')
+			this.params.region = option.type === void 0 ? uni.getStorageSync('region') : uni.getStorageSync('post_region')
 			if (details.id !== void 0) {
 				this.params.id = details.id
 				this.params.title = details.title

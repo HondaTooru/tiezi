@@ -125,8 +125,9 @@
 						<view style="height: 175rpx;color:#999" v-if="!show" class="padding-tb-sm">请输入评论内容</view>
 						<textarea placeholder="请输入评论内容" v-model="query.content" v-else />
 					</view>
-					<view class="cu-form-group">
+					<view class="cu-form-group" style="position: relative;">
 						<button class="cu-btn bg-red sm" @tap="Publish">发表</button>
+						<userAuth @tap.stop="" act/>
 					</view>
 				</form>
 			</view>
@@ -158,6 +159,12 @@
 				},
 				placard_id: '',
 				column_id: ''
+			}
+		},
+		onShareAppMessage (res) {
+			return {
+				title: this.u.category,
+				path: `pages/detail?placard_id=${this.placard_id}&column_id=${this.column_id}`
 			}
 		},
 		onPullDownRefresh () {

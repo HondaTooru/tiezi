@@ -64,7 +64,6 @@
 				picker: [],
 				index: -1,
 				time: '12:00',
-				region: uni.getStorageSync('region'),
 				date: this.$getTime,
 				params: {
 					column_id: '',
@@ -77,12 +76,12 @@
 				}
 			}
 		},
-		onLoad() {
+		onLoad(option) {
 			const details = uni.getStorageSync('details')
 			const type = uni.getStorageSync('cate')
 			this.picker = type
 			this.params.column_id = uni.getStorageSync('nav').id
-			this.params.region = uni.getStorageSync('region')
+			this.params.region = option.type === void 0 ? uni.getStorageSync('region') : uni.getStorageSync('post_region')
 			if (details.id !== void 0) {
 				this.params.address_start = details.address_start
 				this.params.address_end = details.address_end
@@ -103,7 +102,6 @@
 		methods: {
 			...mapActions(['postContent']),
 			post () {
-				console.log(111)
 				this.postContent({...this.params, start_time: this.start_time})
 			},			
 			submit (e) {
