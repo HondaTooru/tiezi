@@ -36,6 +36,12 @@
 				column_id: ''
 			}
 		},
+		onShareAppMessage (res) {
+			return {
+				title: '发帖',
+				path: 'pages/tabBar/post/index'
+			}
+		},
 		onLoad() {
 			const option = uni.getStorageSync('nav')
 			this.column_id = option.id
