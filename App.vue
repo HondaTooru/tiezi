@@ -24,7 +24,13 @@
 					},
 					fail: err => {
 						console.log(err)
+						uni.clearStorageSync()
 						this.$store.commit('SET_USERINFO', {})
+						this.$store.commit('SET_TIEZ', [])
+						this.$store.commit('SET_LIST', [])
+						this.$store.commit('SET_USERSHOP', [])
+						this.$store.commit('SET_LOGIN', false)
+						this.$store.commit('SET_MYDATA', false)						
 					}
 				})
 			// #endif
