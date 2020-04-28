@@ -46,13 +46,19 @@
 					})
 					break;
 					case 2:
-					uni.navigateTo({
-						url: this.url,
-						success: () => {
-							this.$store.commit('SET_ISREAD', false)
-							uni.setStorageSync('details', {})
-						}
-					})
+					if (this.url !== void 0 && this.url !== '') {
+						uni.navigateTo({
+							url: this.url,
+							success: () => {
+								this.$store.commit('SET_ISREAD', false)
+								uni.setStorageSync('details', {})
+							}
+						})
+					} else {
+						uni.switchTab({
+							url: '/pages/tabBar/post/index'
+						})
+					}
 					break;
 					case 3:
 					uni.switchTab({

@@ -117,6 +117,10 @@ service.interceptor.response(response => {
 			resolve(result)
 		} else {
 			uni.hideLoading()
+			uni.showToast({
+				icon: 'none',
+				title: result.msg
+			})
 			reject(result.msg)
 		}		
 	})

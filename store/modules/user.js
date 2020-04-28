@@ -112,7 +112,6 @@ const user = {
 						 return new Promise(rst => {
 							 let action = MakeFriends
 							 const column_id = uni.getStorageSync('nav').id
-							 console.log(uni.getStorageSync('nav'))
 							 if (column_id === 14) action = lookCar
 							 if (column_id === 13 && data.type === void 0) action = postShop
 							 if (column_id === 11) action = postVillage
@@ -363,12 +362,14 @@ const user = {
 				uni.showLoading({ title: '请稍后', mask: true })
 				delPost(data, { header: { token: state.userInfo.token } }).then(res => {
 					if (res.code === 200) {
-						if (data.column_id !== '13') {
+						console.log(data)
+						if (data.column_id !== '11') {
 							const tiez = uni.getStorageSync('tiez')
 							uni.setStorageSync('tiez', tiez.filter((item, index) => index !== idx))
 							commit('SET_TIEZ', state.tiez.filter((item, index) => index !== idx))
 						} else {
 							const shop = uni.getStorageSync('usershop')
+							console.log(shop)
 							uni.setStorageSync('usershop', shop.filter((item, index) => item.id !== data.placard_id))
 							commit('SET_USERSHOP', state.userShop.filter((item, index) => item.id !== data.placard_id))							
 						}

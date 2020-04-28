@@ -564,7 +564,7 @@ export default {
 					]
 					const c_cate = +this.column_id === 13 ? cate.concat(shop_cate) : cate
 					this.type = res.data.cate_name.concat(c_cate)
-					if (flag) this.currentTab = +this.column_id === 13 ? this.type.length - 2 : this.type.length - 1
+					if (flag) this.currentTab = +this.column_id === 13 || this.type.length === 1 ? this.type.length - 2 : this.type.length - 1
 					uni.setStorageSync('cate', res.data.cate_name)
 					this.swiper = res.data.roll
 					resolve()

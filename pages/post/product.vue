@@ -1,15 +1,7 @@
 <template>
 <view class="product-post">
-	<AuthModal/>
-	<form @submit="submit">
-		<view class="cu-form-group">
-			<view class="title">类型</view>
-			<picker @change="PickerChange" :value="index" :range="type" range-key="cate_name">
-				<view class="picker">
-					{{index === -1 ? '请选择' : type[index].cate_name}}
-				</view>
-			</picker>				
-		</view>			
+	<AuthModal @submit="post"/>
+	<form @submit="submit">		
 		<view class="cu-bar bg-white margin-top-xs">
 			<view class="action">图片上传</view>
 			<view class="action">{{ imgList.length }}/3</view>
@@ -52,7 +44,6 @@
 					type: -2,
 					store_id: '',
 					name: '',
-					attribute_id: '',
 					imgurl: [],
 					region: ''
 				}
@@ -62,7 +53,6 @@
 			const details = uni.getStorageSync('details')
 			const type = uni.getStorageSync('cate')
 			this.params.store_id = option.id
-			this.params.attribute_id = type[this.index].id
 			this.params.region = uni.getStorageSync('region')
 			this.type = type
 			if (details.id !== void 0) {
@@ -73,6 +63,9 @@
 		},
 		methods: {
 			...mapActions(['uploadImage', 'postContent']),
+			post () {
+				this.postContent(this.params)
+			},			
 			submit (e) {
 				const rule = [
 					{name:"name", checkType : "notnull",  errorMsg: "请输入产品名称"}
@@ -131,10 +124,6 @@
 						}
 					}
 				})
-			},
-			PickerChange (e) {
-				this.index = e.detail.value
-				this.params.attribute_id = this.type[this.index].id
 			}	
 		}
 	}

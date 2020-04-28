@@ -58,7 +58,7 @@
 					<view class="flex justify-end padding-sm">
 						<view class="flex">
 							<view class="cu-btn bg-red sm">置顶店铺</view>
-							<navigator :url="'/pages/post/product?id='+item.id" hover-class="none" class="cu-btn bg-orange sm margin-left-sm">发布产品</navigator>
+							<view @tap="postPudct(item)" class="cu-btn bg-orange sm margin-left-sm">发布产品</view>
 							<view class="cu-btn bg-yellow sm margin-left-sm" @tap="toProductList(item)">更多产品</view>
 							<view class="action margin-left-sm">
 								<view class="cu-btn bg-sea sm" @tap="editShop(item)">编辑店铺</view>
@@ -119,13 +119,13 @@
 			},
 			async editPro(item, pro) {
 				uni.showLoading({ title: '请稍后' })
-				this.column_id = +item.column_id
+				this.column_id = 13
 				await this.getCate()
 				uni.navigateTo({
 					url: `/pages/post/product?id=${pro.store_id}`,
 					success: () => {
 						uni.setStorageSync('details', {...pro, type: -2})
-						uni.setStorageSync('nav', { name: '本地店铺', id: +item.column_id })
+						uni.setStorageSync('nav', { name: '本地店铺', id: 13 })
 					}
 				})
 				uni.hideLoading()					
@@ -133,25 +133,25 @@
 			},
 			async editShop (item) {
 				uni.showLoading({ title: '请稍后' })
-				this.column_id = +item.column_id
+				this.column_id = 13
 				await this.getCate()
 				uni.navigateTo({
-					url: `/pages/post/shop`,
+					url: `/pages/post/shop?act=0`,
 					success: () => {
 						uni.setStorageSync('details', item)
-						uni.setStorageSync('nav', { name: '本地店铺', id: +item.column_id })
+						uni.setStorageSync('nav', { name: '本地店铺', id: 13 })
 					}
 				})
 				uni.hideLoading()				
 			},
 			async toProductList (item) {
 				uni.showLoading({ title: '请稍后' })
-				this.column_id = +item.column_id
+				this.column_id = 13
 				await this.getCate()
 				uni.navigateTo({
 					url: `/pages/productlist?id=${item.id}`,
 					success: () => {
-						uni.setStorageSync('nav', { name: '本地店铺', id: +item.column_id })
+						uni.setStorageSync('nav', { name: '本地店铺', id: 13 })
 					}
 				})
 				uni.hideLoading()
@@ -201,7 +201,16 @@
 						resolve()
 					})
 				})
-			},			
+			},
+			postPudct (item) {
+				uni.navigateTo({
+					url: `/pages/post/product?id=${item.id}`,
+					success: () => {
+						uni.setStorageSync('details', {})
+						uni.setStorageSync('nav', { name: '本地店铺', id: 13 })
+					}
+				})
+			},
 			async Edit (item) {
 				uni.showLoading({ mask: true, title: '请稍后' })
 				this.column_id = +item.column_id

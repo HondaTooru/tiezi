@@ -79,7 +79,7 @@
 				const formData = e.detail.value
 				const checkRes = graceChecker.check(formData, rule)
 				if (checkRes) {
-					if (this.params.category_id !== '') {
+					if (this.params.category_id !== '' || !this.type.length) {
 						this.postContent(this.params)
 					} else {
 						uni.showToast({ title: '请选择分类', icon: 'none' })

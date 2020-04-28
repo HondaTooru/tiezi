@@ -10,6 +10,37 @@
 					<image :src="item.pic" mode="aspectFill"></image>
 				</swiper-item>
 			</swiper>
+			<view class="list padding-bottom-xs margin-bottom-xs">
+				<view class="item padding-xs bg-white solid-bottom" v-for="(item, index) in x" :key="index" v-if="item.column_id === 14" @tap="toDetail" :data-item="item">
+					<view class="flex justify-between">
+						<view class="cu-tag bg-grey" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.cate_name }}</view>
+						<view class="cu-steps steps-arrow">
+							<view class="cu-item padding-lr">
+								<view class="cu-tag bg-sea padding-lr">{{ item.address_start }}</view>
+							</view>
+							<view class="cu-item padding-left">
+								<view class="cu-tag bg-sea padding-lr">{{ item.address_end }}</view>
+							</view>							
+						</view>
+					</view>
+					<view class="flex justify-end margin-tb-sm">
+						<view class="margin-tb-xs flex align-center">
+							<text class="cuIcon-time padding-right-xs"></text>
+							<text class="text-sm text-sm-title">{{ item.start_time }}</text>
+						</view>
+					</view>
+					<view class="flex justify-between align-center">
+						<view class="cu-tag line-gray">{{ item.state === '0' ? '正常' : item.stete === '1' ? '已找车' : '车已满' }}</view>
+						<view class="flex align-center">
+							<view class="cu-capsule radius">
+								<view class="cu-tag bg-grey"><text class="cuIcon-phone"></text></view>
+								<view class="cu-tag line-grey" @tap.stop="makeCallPhone(item.phone)">{{ item.phone }}</view>
+							</view>
+							<view class="padding-left-sm" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill text-sea"></text></view>
+						</view>
+					</view>
+				</view>					
+			</view>
 			<view class="shop">
 				<navigator hover-class="none" :url="'/pages/productlist?id='+item.id+'&phone='+item.phone" class="item" v-for="(item, i) in shopList" :key="i">
 					<view class="el radius bg-red flex flex-direction justify-between">
@@ -51,48 +82,8 @@
 						</view>
 					</view>
 				</view>
-				<view class="item padding-xs bg-white solid-bottom" v-else @tap="toDetail" :data-item="item">
-					<view class="flex justify-between">
-						<view class="cu-tag bg-grey" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.cate_name }}</view>
-						<view class="cu-steps steps-arrow">
-							<view class="cu-item padding-lr">
-								<view class="cu-tag bg-sea padding-lr">{{ item.address_start }}</view>
-							</view>
-							<view class="cu-item padding-left">
-								<view class="cu-tag bg-sea padding-lr">{{ item.address_end }}</view>
-							</view>							
-						</view>
-					</view>
-					<view class="flex justify-end margin-tb-sm">
-						<view class="margin-tb-xs flex align-center">
-							<text class="cuIcon-time padding-right-xs"></text>
-							<text class="text-sm text-sm-title">{{ item.start_time }}</text>
-						</view>
-					</view>
-					<view class="flex justify-between align-center">
-						<view class="cu-tag line-gray">{{ item.state === '0' ? '正常' : item.stete === '1' ? '已找车' : '车已满' }}</view>
-						<view class="flex align-center">
-							<view class="cu-capsule radius">
-								<view class="cu-tag bg-grey"><text class="cuIcon-phone"></text></view>
-								<view class="cu-tag line-grey" @tap.stop="makeCallPhone(item.phone)">{{ item.phone }}</view>
-							</view>
-							<view class="padding-left-sm" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill text-sea"></text></view>
-						</view>
-					</view>
-				</view>				
 			</view>
 		</view>
-<!-- 		<view class="cu-bar foot input" :style="[{bottom:InputBottom+'px'}]">
-			<view class="action">
-				<text class="cuIcon-sound text-grey"></text>
-			</view>
-			<input class="solid-bottom" :adjust-position="false" :focus="false" maxlength="300" cursor-spacing="10"
-			 @focus="InputFocus" @blur="InputBlur"></input>
-			<view class="action">
-				<text class="cuIcon-emojifill text-grey"></text>
-			</view>
-			<button class="cu-btn bg-green shadow">发送</button>
-		</view>	 -->
 		<view class="cu-modal" :class="{ show }">
 			<view class="cu-dialog">
 				<view class="cu-bar bg-white justify-end">

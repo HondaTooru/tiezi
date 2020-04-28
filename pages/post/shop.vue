@@ -29,27 +29,29 @@
 			<view class="title">地址</view>
 			<input type="text" placeholder="请输入地址" name="address" v-model="params.address" />
 		</view>
-		<view class="cu-form-group">
-			<view class="title">产品名称</view>
-			<input type="text" placeholder="请输入产品名称" name="name" v-model="params.name" />
-		</view>
-		<view class="cu-bar bg-white margin-top-xs solid-top">
-			<view class="action">产品图片</view>
-			<view class="action">{{ imgList.length }}/3</view>
-		</view>	
-		<view class="cu-form-group">
-			<view class="grid col-4 grid-square flex-sub">
-				<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
-				 <image :src="imgList[index]" mode="aspectFill"></image>
-					<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
-						<text class='cuIcon-close'></text>
+		<block v-if="act === -1">
+			<view class="cu-form-group">
+				<view class="title">产品名称</view>
+				<input type="text" placeholder="请输入产品名称" name="name" v-model="params.name" />
+			</view>
+			<view class="cu-bar bg-white margin-top-xs solid-top">
+				<view class="action">产品图片</view>
+				<view class="action">{{ imgList.length }}/3</view>
+			</view>	
+			<view class="cu-form-group">
+				<view class="grid col-4 grid-square flex-sub">
+					<view class="bg-img" v-for="(item,index) in imgList" :key="index" @tap="ViewImage" :data-url="imgList[index]">
+					 <image :src="imgList[index]" mode="aspectFill"></image>
+						<view class="cu-tag bg-red" @tap.stop="DelImg" :data-index="index">
+							<text class='cuIcon-close'></text>
+						</view>
+					</view>
+					<view class="solids" @tap="ChooseImage" v-if="imgList.length<3">
+						<text class='cuIcon-cameraadd'></text>
 					</view>
 				</view>
-				<view class="solids" @tap="ChooseImage" v-if="imgList.length<3">
-					<text class='cuIcon-cameraadd'></text>
-				</view>
-			</view>
-		</view>				
+			</view>				
+		</block>
 		<view class="cu-form-group">
 			<button class="cu-btn bg-red" form-type="submit">{{ params.id ? '更新' : '发布' }}</button>
 			<userAuth></userAuth>
@@ -66,6 +68,7 @@
 				type:[],
 				imgList: [],
 				index: -1,
+				act: -1, 
 				params: {
 					region: '',
 					column_id: '',
@@ -85,6 +88,7 @@
 			this.type = type			
 			this.params.column_id = uni.getStorageSync('nav').id
 			this.params.region = option.type === void 0 ? uni.getStorageSync('region') : uni.getStorageSync('post_region')
+			this.act = option.act !== void 0 ? 0 : -1
 			if (details.id !== void 0) {
 				this.params.id = details.id
 				this.params.title = details.title
@@ -93,6 +97,9 @@
 				this.params.address = details.address
 				this.params.region = details.region
 				this.params.column_id = details.column_id
+				this.params.category_id = details.category_id
+				this.index = this.type.findIndex(item => item.id === details.category_id)
+				console.log(this.index)
 			}
 		},
 		computed: {
@@ -143,28 +150,40 @@
 				})
 			},				
 			submit (e) {
-				const rule = [
+				const t1 = [
 					{name:"title", checkType : "notnull", errorMsg:"请输入店铺名称"},
 					{name:"describe", checkType : "notnull",  errorMsg: "请输入店铺描述"},
 					{name:"phone", checkType : "notnull", errorMsg:"请输入联系方式"},
-					{name:"address", checkType : "notnull", errorMsg:"请输店铺地址"},
-					{name:"name", checkType : "notnull", errorMsg:"请输入产品名称"},
+					{name:"address", checkType : "notnull", errorMsg:"请输店铺地址"}
 				]
+				const t2 = [
+					{name:"name", checkType : "notnull", errorMsg:"请输入产品名称"}
+				]
+				const rule = this.act === -1 ? t1.concat(t2) : t1
 				const formData = e.detail.value
 				const checkRes = graceChecker.check(formData, rule)
 				if (checkRes) {
-					if (this.imgList.length >= 3) {
+					if (this.act === -1) {
+						if (this.imgList.length >= 3) {
+							if (this.params.category_id !== '') {
+								this.params.imgurl = this.imgList.join(',')
+								this.postContent({...this.params})
+							} else {
+								uni.showToast({ title: '请选择分类', icon: 'none' })
+							}						
+						} else {
+							uni.showModal({
+								content: '请上传3张产品图片',
+								showCancel: false
+							})						
+						}
+					} else {
 						if (this.params.category_id !== '') {
 							this.params.imgurl = this.imgList.join(',')
 							this.postContent({...this.params})
 						} else {
 							uni.showToast({ title: '请选择分类', icon: 'none' })
-						}						
-					} else {
-						uni.showModal({
-							content: '请上传3张产品图片',
-							showCancel: false
-						})						
+						}
 					}
 				} else {
 					uni.showToast({ title: graceChecker.error, icon: "none" })

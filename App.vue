@@ -1,9 +1,11 @@
 <script>
 	export default {
-		onLaunch: function() {
+		onLaunch: function() {},
+		onShow: function() {
 			// #ifdef MP-WEIXIN
 				uni.checkSession({
 					success: res => {
+						console.log(res)
 						const u = uni.getStorageSync('u_key')
 						const l = uni.getStorageSync('tiez')
 						const c = uni.getStorageSync('collect')
@@ -21,13 +23,11 @@
 						}
 					},
 					fail: err => {
+						console.log(err)
 						this.$store.commit('SET_USERINFO', {})
 					}
 				})
-			// #endif			
-		},
-		onShow: function() {
-			// console.log('App Show')
+			// #endif
 		},
 		onHide: function() {
 			// console.log('App Hide')

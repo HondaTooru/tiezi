@@ -132,7 +132,8 @@
 				</form>
 			</view>
 		</view>
-	</view>	
+	</view>
+	<tabBar name="发帖"></tabBar>	
 </view>
 </template>
 
