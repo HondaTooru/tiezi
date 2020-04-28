@@ -12,9 +12,15 @@
 			</view>
 		</view>
 	</view>
-	<view class="margin-tb-xs bg-white flex justify-between padding-tb-sm padding-lr">
-		<view>地区</view>
-		<view>{{ u.region }}</view>
+	<view class="margin-tb-xs bg-white flex flex-direction justify-between padding-lr">
+		<view class="flex padding-tb-sm flex-sub justify-between align-center">
+			<view>地区</view>
+			<view>{{ u.region }}</view>
+		</view>
+		<view class="flex padding-tb-sm solid-top flex-sub justify-between align-center" v-if="u.phone">
+			<view>联系方式</view>
+			<view @tap="callPhone">{{ u.phone }}<text class="margin-left-sm text-sea cuIcon-phone"></text></view>
+		</view>		
 	</view>
 	<block v-if="u.column_id === '14'">
 		<view class="margin-bottom-xs">

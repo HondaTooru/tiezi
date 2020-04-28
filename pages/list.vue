@@ -150,7 +150,7 @@
 							<view class="el" @tap.stop="moreAction(2, item)"><text class="cuIcon-messagefill padding-right-xs"></text><text class="text-sm">评论</text></view>
 							<view class="el" @tap.stop="moreAction(3, item)"><text class="cuIcon-fork padding-right-xs"></text><button open-type="share" hover-class="none" class="share" :data-item="item">转发</button></view>
 						</view>							
-						<view class="flex"><view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.column }}</view><view class="text-cut text-sm-title">{{ item.title }}</view></view>
+						<view class="flex align-center"><view class="cu-tag margin-right-xs" :style="{backgroundColor: item.background, color: item.color, borderBottom: '4rpx solid #598bca'}">{{ item.column }}</view><view class="text-cut text-sm-title">{{ item.title }}</view></view>
 						<view class="more margin-left-xs" @tap.stop="tapAction(item, index)"></view>
 					</view>
 				</navigator>				
