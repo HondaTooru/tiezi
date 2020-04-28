@@ -53,6 +53,13 @@
 					</view>
 				</navigator>
 			</view>
+			<view class="padding-bottom-sm">
+				<swiper :indicator-dots="false" class="screen-swiper round-dot" :autoplay="true" :interval="3000" :duration="1000">
+					<swiper-item v-for="(item, index) in xuu" :key="index">
+						<image :src="item.img" mode="aspectFill"></image>
+					</swiper-item>
+				</swiper>				
+			</view>
 			<view class="list padding-bottom-xs margin-bottom-sm">
 				<view class="item solid-bottom" v-for="(item, index) in x" :key="index" v-if="item.column_id !== 14">
 					<block v-if="item.imgurl">
@@ -214,6 +221,7 @@
 			return {
 				InputBottom: 0,
 				shareItem: {},
+				xuu: [],
 				shopList: [],
 				show: false,
 				action: false,
@@ -392,6 +400,7 @@
 						this.$store.commit('SET_CITY', data.region)
 						this.$store.commit('SET_RULE', data.rule)
 						this.s = data.roll
+						this.xuu = data.roll1
 						this.is_show = data.is_show
 						const region = uni.getStorageSync('region')
 						this.$store.commit('SET_CONTACT', {phone: data.phone, address: data.address})					
