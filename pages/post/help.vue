@@ -73,8 +73,8 @@
 			},
 			submit (e) {
 				const rule = [
-					{name:"title", checkType : "notnull", errorMsg:"请输入标题"},
-					{name:"content", checkType : "notnull", errorMsg:"请输入内容"},
+					{name:"title", checkType : "notnull", errorMsg:"请输入标题"}
+					// {name:"content", checkType : "notnull", errorMsg:"请输入内容"},
 				]
 				const formData = e.detail.value
 				const checkRes = graceChecker.check(formData, rule)

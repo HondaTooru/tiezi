@@ -73,8 +73,8 @@
 				const rule = [
 					{name:"address_start", checkType : "notnull", errorMsg:"请输入出发地址"},
 					{name:"address_end", checkType : "notnull",  errorMsg: "请输入目的地址"},
-					{name:"phone", checkType : "notnull", errorMsg:"请输入联系方式"},
-					{name:"content", checkType : "notnull", errorMsg:"请输入内容"},
+					{name:"phone", checkType : "notnull", errorMsg:"请输入联系方式"}
+					// {name:"content", checkType : "notnull", errorMsg:"请输入内容"},
 				]
 				const formData = e.detail.value
 				const checkRes = graceChecker.check(formData, rule)
