@@ -44,7 +44,7 @@
 					<EmptyData v-else :src="src">{{ act ? '你还没有收藏的帖子' : '你还没有发表帖子' }}</EmptyData>
 				</view>
 			</view>
-			<navigator hover-class="none" url="/pages/post/shop" class="flex flex-direction padding-lr-sm bg-white"><view class="cu-btn bg-red margin-tb-sm lg">开店</view></navigator>
+			<view hover-class="none" @tap="openStore" class="flex flex-direction padding-lr-sm bg-white"><view class="cu-btn bg-red margin-tb-sm lg">开店</view></view>
 			<block v-for="(item, index) in userShop" :key="index">
 				<view class="margin-top-sm bg-sea padding-sm shop-name">
 					<view class="shop text-center text-df">{{ item.title }}</view>
@@ -178,6 +178,14 @@
 					this.$store.commit('SET_PAGE', this.page)
 					this.getList()
 				}
+			},
+			openStore () {
+				uni.navigateTo({
+					url: '/pages/post/shop',
+					success: () => {
+						uni.setStorageSync('details', {})
+					}
+				})
 			},
 			viewImg(current, urls) {
 				uni.previewImage({

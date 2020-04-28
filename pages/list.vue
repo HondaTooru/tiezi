@@ -397,7 +397,7 @@ export default {
 			list: [],
 			type: [],
 			swiper: [],
-			currentTab: '',
+			currentTab: -1,
 			category_id: ''
 		}
 	},
@@ -441,7 +441,6 @@ export default {
 			return url
 		},
 		name () {
-			console.log(this.column_id === 13 ? '发布' : '发帖')
 			return this.column_id === 13 ? '发布' : '发帖'
 		}
 	},
@@ -527,10 +526,12 @@ export default {
 		},
 		change(e) {
 			const id = +e.currentTarget.dataset.id
-			console.log(id, this.column_id)
 			if (id === -2 && this.column_id === 13) {
 				uni.navigateTo({
-					url: '/pages/post/shop'
+					url: '/pages/post/shop',
+					success: () => {
+						uni.setStorageSync('details', {})
+					}
 				})
 			} else {
 				const index = e.currentTarget.dataset.index
@@ -564,7 +565,7 @@ export default {
 					]
 					const c_cate = +this.column_id === 13 ? cate.concat(shop_cate) : cate
 					this.type = res.data.cate_name.concat(c_cate)
-					if (flag) this.currentTab = +this.column_id === 13 || this.type.length === 1 ? this.type.length - 2 : this.type.length - 1
+					if (flag) this.currentTab = +this.column_id === 13 ? this.type.length - 2 : this.type.length - 1
 					uni.setStorageSync('cate', res.data.cate_name)
 					this.swiper = res.data.roll
 					resolve()
